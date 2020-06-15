@@ -1,0 +1,29 @@
+$d11-blue: #000A3C;
+$d11-blue-old: #061958;
+$d11-blue-gray: #597090;
+$d11-gray: #717984;
+
+$d11-app-width: 1185px;
+
+$d11-50-50-test-background: linear-gradient(blue 50%, green 50%);
+$d11-header-context-background-color: rgba(0,10,60,.6);
+$d11-header-content-background-color: rgba(0,10,60,.4);
+
+$d11-background-picture-padding: 200px;
+
+$d11-divider-border: 1px rgba(0, 0, 0, 0.12) solid;
+
+$d11-spacer: 6px;
+$d11-large-spacer: 12px;
+
+$d11-match-even-icon-width: 18px;
+$d11-match-even-icon-height: $d11-match-even-icon-width;
+
+// Vuetify overrides -----------------------------------------------------------
+
+$expansion-panel-header-font-size: 16px;
+
+//$tab-font-weight: inherit;
+//$tab-font-size: inherit;
+$tabs-item-letter-spacing: 0px;
+$tabs-bar-height: 60px;

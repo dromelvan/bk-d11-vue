@@ -1,0 +1,9 @@
+.v-menu__content {
+  .v-list-item:hover {
+    background-color: $d11-blue-gray;
+  }
+
+  .v-list-item:hover::before {
+    opacity: 0;
+  }
+}

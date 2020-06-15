@@ -1,0 +1,84 @@
+.v-application {
+  font-family: "Roboto Condensed", Arial, Helvetica, sans-serif;
+}
+
+.theme--light.v-btn:not(.previous-btn):not(.next-btn) {
+  color: white;
+  background-color: $d11-blue !important;
+  text-transform: none;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0px;
+}
+
+.d11-button-container {
+  padding-left: 3px;
+  padding-right: 3px;
+  display: flex;
+
+  .previous-btn {
+    .v-icon {
+        font-size: 40px;
+    }
+  }
+}
+
+.active {
+  animation: active-pulse-animation 4s infinite;
+}
+
+@keyframes active-pulse-animation {
+  0% {
+    color: rgba(255,255,255,1);
+  }
+
+  50% {
+    color: rgba(255,255,255,.4);
+  }
+
+  100% {
+    color: rgba(255,255,255,1);
+  }
+}
+
+.v-tabs-slider {
+  background-color: $d11-blue;
+}
+
+//.v-btn {
+//    text-transform: none;
+//}
+
+/* .v-application {
+  h1 {
+    font-size: 30px;
+
+    font-family: "Open Sans Condensed", Arial, Helvetica, sans-serif;
+  }
+
+  h2 {
+    font-size: 28px;
+    font-family: "Open Sans Condensed", Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-family: "Oswald", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+  }
+
+  h4, p {
+    font-family: "Oswald", Arial, Helvetica, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+  }
+}
+ */
+/* .v-application-xs {
+  h2 {
+    font-size: 27px;
+  }
+}
+ */
