@@ -102,7 +102,7 @@
             </div>
           </span>
           <span class="match-stats">
-            <v-btn :to="{ name: 'match', params: { id: match.id, endpoint: match.links.events }}" link>Match Stats</v-btn>
+            <v-btn :to="{ name: 'match', params: { id: match.id }}" link>Match Stats</v-btn>
           </span>
         </div>
 

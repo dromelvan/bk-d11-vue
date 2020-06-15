@@ -7,11 +7,15 @@ var d11Rest = {
       seasonIds: 'seasons/ids',
       season: 'seasons/:id',
 
+      premierLeague: 'premier-leagues/:id',
+
       matchDay: 'match-days/:id',
 
       match: 'matches/:id',
       matchEvents: 'matches/:id/events',
-      matchStats: 'matches/:id/stats'
+      matchStats: 'matches/:id/stats',
+
+      teamTableStatsByMatchDayId: 'team-table-stats/match-day/:id'
     }
   }),
   methods: {

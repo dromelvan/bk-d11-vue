@@ -4,7 +4,11 @@
 
     <v-container class="d11-button-container">
       <v-btn icon class="previous-btn"><v-icon>mdi-chevron-left</v-icon></v-btn>
-      <h2>Premier League {{ matchDay.seasonName }}</h2>
+      <h2>
+        <router-link :to="{ name: 'premier-league', params: { id: matchDay.premierLeagueId }}">
+          Premier League {{ matchDay.seasonName }}
+        </router-link>
+      </h2>
     </v-container>
 
     <v-divider/>
@@ -18,14 +22,14 @@
         <div class="match-date" v-for="date in Object.keys(matchDay.matches)" :key="date">
           <h4 class="match-date">{{ date | moment("dddd, MMMM Do YYYY") }}</h4>
 
-          <div v-if="$vuetify.breakpoint.smAndUp" >
+          <div v-if="smAndUp" >
             <v-expansion-panels multiple accordion tile flat>
               <match-day-match-events v-for="matchId in matchDay.matches[date]" :key="matchId" :matchId="matchId"/>
             </v-expansion-panels>
             <v-divider/>
           </div>
 
-          <v-list v-if="$vuetify.breakpoint.xs" flat>
+          <v-list v-if="xs" flat>
             <match-day-match v-for="matchId in matchDay.matches[date]" :key="matchId" :matchId="matchId"/>
           </v-list>
 
@@ -78,6 +82,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .d11-button-container {
+    a {
+      text-decoration: none;
+    }
+  }
   .v-expansion-panels {
     padding-top: $d11-spacer;
   }

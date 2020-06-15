@@ -24,16 +24,16 @@ var helpers = {
     },
 
     pending: function (status) {
-      return status === 'PENDING'
+      return status.toUpperCase() === 'PENDING'
     },
     active: function (status) {
-      return status === 'ACTIVE'
+      return status.toUpperCase() === 'ACTIVE'
     },
     fullTime: function (status) {
-      return status === 'FULL_TIME'
+      return status.toUpperCase() === 'FULL_TIME'
     },
     finished: function (status) {
-      return status === 'FINISHED'
+      return status.toUpperCase() === 'FINISHED'
     }
   },
   computed: {
