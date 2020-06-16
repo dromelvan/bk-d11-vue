@@ -24,11 +24,13 @@
       <header-content-background>
         <header-content>
           <div class="premier-league-name">
-            Premier League {{ premierLeague.seasonName }} League Table
+            <v-btn icon :to="{ name: 'premier-league', params: { id: premierLeague.id - 1 }}" class="previous-btn"><v-icon class="chevron-icon chevron-left-icon">mdi-chevron-left</v-icon></v-btn>
+            <template v-if="smAndUp">Premier League {{ premierLeague.seasonName }} League Table</template>
+            <template v-else>{{ premierLeague.seasonName }} PL Table</template>
+            <v-btn icon :to="{ name: 'premier-league', params: { id: premierLeague.id + 1 }}" class="next-btn"><v-icon class="chevron-icon chevron-right-icon">mdi-chevron-right</v-icon></v-btn>
           </div>
         </header-content>
-
-        <v-container style="height: 30px"/>
+        <v-container/>
       </header-content-background>
 
     </header-section>
@@ -51,6 +53,7 @@
             <div class="premier-league-table-stat-name points"><template v-if="smAndUp">Points</template><template v-else>Pts</template></div>
           </div>
           <v-divider/>
+
           <div v-for="teamTableStat in teamTableStats" :key="teamTableStat.id">
             <div class="premier-league-table-stats" v-bind:class="'ranking-' + teamTableStat.ranking">
               <div class="premier-league-table-stat ranking">{{ teamTableStat.ranking }}</div>
@@ -113,12 +116,20 @@ export default {
     TableUpIcon: () => import('@/components/match-events/TableUpIcon'),
     TableDownIcon: () => import('@/components/match-events/TableDownIcon')
   },
+  methods: {
+    getPremierLeague: function () {
+      axios
+        .get(this.endpoint('premierLeague', { id: this.$route.params.id }))
+        .then(response => (this.premierLeague = response.data))
+    }
+  },
   mounted () {
-    axios
-      .get(this.endpoint('premierLeague', { id: this.$route.params.id }))
-      .then(response => (this.premierLeague = response.data))
+    this.getPremierLeague()
   },
   watch: {
+    '$route' (to, from) {
+      this.getPremierLeague()
+    },
     premierLeague: function (premierLeague) {
       axios
         .get(this.endpoint('teamTableStatsByMatchDayId', { id: premierLeague.matchDays[premierLeague.matchDays.length - 1] }))
@@ -139,9 +150,29 @@ export default {
   }
 
   .premier-league-name {
+    display: flex;
     line-height: 2.3em;
     padding-right: 0.25em;
     padding-left: 0.25em;
+
+    .previous-btn,
+    .next-btn {
+      align-self: center;
+      color: white;
+      font-size: 1em;
+
+      .v-icon {
+        font-size: 1.75em;
+      }
+    }
+
+    .previous-btn {
+      margin-right: $d11-spacer;
+    }
+
+    .next-btn {
+      margin-left: auto;
+    }
   }
 
   .premier-league-table-container {
