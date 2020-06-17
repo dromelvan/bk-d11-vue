@@ -19,6 +19,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  $background-picture-height: 400px;
+  $background-picture-height-xs: 285px;
+
   .background-picture {
     position: absolute;
     top: 0;
@@ -32,7 +35,7 @@ export default {
       object-fit: cover;
       object-position: 50% 30%;
       width: 100%;
-      height: 450px; // Without this the image covers the whole height.
+      height: $background-picture-height; // Without this the image covers the whole height.
     }
   }
 
@@ -43,19 +46,19 @@ export default {
     right: 0;
     bottom: 0;
     left: 0;
-    height: 450px;
+    height: $background-picture-height;
     background: linear-gradient(rgba(0,0,0,.3) 60%, rgba(0,0,0,.6) 80%, rgba(0,0,0,.8) 90%,#000000 98%);
   }
 
   .v-application-xs {
     .background-picture {
       .background-img {
-        height: 285px; // Image size 440x300 should work fine.
+        height: $background-picture-height-xs; // Image size 440x300 should work fine.
       }
     }
 
     .background-picture:after {
-      height: 285px;
+      height: $background-picture-height-xs;
     }
   }
 

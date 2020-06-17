@@ -12,6 +12,7 @@ export default {
 
 <style lang="scss" scoped>
   .header-content-background {
+    padding-bottom: $d11-large-spacer;
     background-color: $d11-header-content-background-color;
   }
 </style>

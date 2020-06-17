@@ -1,12 +1,12 @@
 <template>
   <div>
     <v-container class="time">
-      <span class="kick-off">Kick Off {{ match.datetime | moment("HH:mm") }}</span>
-      <span class="elapsed" v-bind:class="{ active: this.active(match.status) }" v-if="!this.pending(match.status)">{{ this.elapsedText(match.elapsed )}}</span>
+      <div class="kick-off">Kick Off {{ match.datetime | moment("HH:mm") }}</div>
+      <div class="elapsed" v-bind:class="{ active: this.active(match.status) }" v-if="!this.pending(match.status)">{{ this.elapsedText(match.elapsed )}}</div>
     </v-container>
 
     <header-content-background>
-      <header-content class="match-result">
+      <header-content vertical class="match-result">
         <div class="team home">
           <span class="team-image-container"><team-image :version="'tiny'" :id="match.homeTeamId"/></span>
           <span class="team-name" v-if="match.homeTeamName.length < 16">{{ match.homeTeamName }}</span>
@@ -70,41 +70,28 @@ export default {
 
 <style lang="scss" scoped>
   .match-result {
-    .team {
-      display: table;
+    .header-content {
+      .team {
+        display: flex;
 
-      .team-image-container,
-      .team-name,
-      .team-score {
-        display: table-cell;
-        vertical-align: middle;
-      }
+        .team-name {
+          width: 100%;
+        }
 
-      .team-name {
-        padding-left: 0.25em;
-        width: 100%;
-      }
-
-      .team-score {
-        min-width: 36px;
-        text-align: center;
+        .team-score {
+          min-width: 36px;
+          text-align: center;
+        }
       }
     }
   }
 
   .time {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    display: table;
-
-    margin-top: $d11-background-picture-padding / 2;
-
-    span {
-      display: table-cell;
-    }
+    padding: 0px inherit;
+    display: flex;
 
     .elapsed {
-      text-align: right;
+      margin-left: auto;
     }
   }
 

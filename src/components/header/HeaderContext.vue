@@ -14,6 +14,8 @@ export default {
 
 <style lang="scss" scoped>
   .header-context-container {
+    margin-bottom: $d11-background-picture-padding;
+
     .header-context {
       display: flex;
       padding: 0.75em;
@@ -24,8 +26,9 @@ export default {
         color: white;
       }
 
-      .v-icon.chevron-icon {
-        font-size: 1.8em;
+      .v-icon.context-icon {
+        padding-left: 0.5em;
+        padding-right: 0.25em;
       }
 
       .header-context-link-container {
@@ -40,6 +43,8 @@ export default {
 
   .v-application-xs {
     .header-context-container {
+      margin-bottom: $d11-background-picture-padding / 2;
+
       .header-context {
         line-height: 1em;
         display: inherit;

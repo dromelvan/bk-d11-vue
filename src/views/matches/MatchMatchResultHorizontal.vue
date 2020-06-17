@@ -1,36 +1,35 @@
 <template>
   <div>
+
     <v-container class="time">
       <span class="kick-off">Kick Off {{ match.datetime | moment("HH:mm") }}</span>
     </v-container>
 
     <header-content-background>
-      <header-content>
-        <div class="match-result">
-          <div class="team home" v-if="mdAndUp || match.homeTeamName.length < 20">
-            <team-image :version="'small'" :id="match.homeTeamId"/>
-            {{ match.homeTeamName }}
+      <header-content class="match-result">
+        <div class="team home" v-if="mdAndUp || match.homeTeamName.length < 20">
+          <team-image :version="'small'" :id="match.homeTeamId"/>
+          {{ match.homeTeamName }}
+        </div>
+        <div class="team home" v-else>
+          <team-image :version="'small'" :id="match.homeTeamId"/>
+          {{ match.homeTeamShortName }}
+        </div>
+        <div class="emphasised" v-if="!pending(match.status)">
+          <div class="score">
+          {{ match.homeTeamGoals }} - {{ match.awayTeamGoals }}
           </div>
-          <div class="team home" v-else>
-            <team-image :version="'small'" :id="match.homeTeamId"/>
-            {{ match.homeTeamShortName }}
-          </div>
-          <div class="emphasised" v-if="!pending(match.status)">
-            <div class="score">
-            {{ match.homeTeamGoals }} - {{ match.awayTeamGoals }}
-            </div>
-          </div>
-          <div v-else>
-            <div class="score">vs</div>
-          </div>
-          <div class="team away" v-if="mdAndUp || match.awayTeamName.length < 20">
-            {{ match.awayTeamName }}
-            <team-image :version="'small'" :id="match.awayTeamId"/>
-          </div>
-          <div class="team away" v-else>
-            {{ match.awayTeamShortName }}
-            <team-image :version="'small'" :id="match.awayTeamId"/>
-          </div>
+        </div>
+        <div v-else>
+          <div class="score">vs</div>
+        </div>
+        <div class="team away" v-if="mdAndUp || match.awayTeamName.length < 20">
+          {{ match.awayTeamName }}
+          <team-image :version="'small'" :id="match.awayTeamId"/>
+        </div>
+        <div class="team away" v-else>
+          {{ match.awayTeamShortName }}
+          <team-image :version="'small'" :id="match.awayTeamId"/>
         </div>
       </header-content>
 
@@ -48,6 +47,7 @@
           </div>
         </div>
       </v-container>
+
     </header-content-background>
   </div>
 </template>
@@ -67,29 +67,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .match-result {
-    max-height: 2.3em;
-    line-height: 2.3em;
-  }
-
   .match-goals-container {
-    padding-top: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
+
+    .match-goals {
+      display: flex;
+    }
   }
 
   .match-result,
   .match-goals {
-    display: flex;
-    padding-right: 0.25em;
-    padding-left: 0.25em;
-
     .team,
     .goals  {
       width: 50%;
     }
 
-    .goal-list {
-      list-style: none;
-    }
     .team.home,
     .goals.away {
       text-align: left;
@@ -114,16 +107,11 @@ export default {
   }
 
   .time {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    display: flex;
+    padding: 0;
 
     span {
-      display: table;
       margin: 0 auto;
-    }
-
-    .kick-off {
-      margin-top: $d11-background-picture-padding;
     }
   }
 

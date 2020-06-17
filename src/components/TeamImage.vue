@@ -17,3 +17,28 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .team-image {
+    padding-right: $d11-spacer;
+  }
+
+  :not(.vertical) {
+    .away {
+      .team-image {
+        padding-left: $d11-spacer;
+        padding-right: inherit;
+      }
+    }
+  }
+
+  .vertical {
+    .away {
+      .team-image {
+        padding-left: 0;
+        padding-right: $d11-spacer;
+      }
+    }
+  }
+
+</style>

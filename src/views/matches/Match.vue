@@ -9,12 +9,12 @@
       <header-context class="match-context">
         <div class="datetime">{{ match.datetime | moment("dddd, MMMM Do YYYY") }}</div>
         <br v-if="xs"/>
-        <v-icon v-if="smAndUp" class="stadium-icon">mdi-stadium</v-icon>
+        <v-icon v-if="smAndUp" medium class="context-icon">mdi-stadium</v-icon>
         <div class="stadium">{{ match.stadiumName }}, {{ match.stadiumCity }}</div>
         <div v-if="smAndUp" class="header-context-link-container">
           <a class="header-context-link whoscored-link" target="_blank" :href="'https://www.whoscored.com/Matches/' + match.whoScoredId + '/'">View on WhoScored</a>
         </div>
-        <v-icon v-if="smAndUp" class="chevron-icon chevron-right-icon">mdi-chevron-right</v-icon>
+        <v-icon medium v-if="smAndUp">mdi-chevron-right</v-icon>
       </header-context>
 
       <match-match-result-horizontal :match="match" v-if="smAndUp"/>
@@ -26,12 +26,12 @@
     <content-section>
       <v-container class="player-match-stats-container">
         <v-tabs :grow="xs" class="player-match-stats-tabs">
-          <v-tab class="player-match-stats-tab home">
+          <v-tab class="player-match-stats-tab">
             <team-image :version="'tiny'" :id="match.homeTeamId"/>
             <span v-if="smAndUp">{{ match.homeTeamName }} Stats</span>
             <span v-if="xs">{{ match.homeTeamShortName }}</span>
           </v-tab>
-          <v-tab class="player-match-stats-tab away">
+          <v-tab class="player-match-stats-tab">
             <team-image :version="'tiny'" :id="match.awayTeamId"/>
             <span v-if="smAndUp">{{ match.awayTeamName }} Stats</span>
             <span v-if="xs">{{ match.awayTeamShortName }}</span>
@@ -76,18 +76,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .stadium-icon {
-    padding-left: 0.5em;
-    padding-right: 0.25em;
-  }
-
   .player-match-stats-container {
     padding: 0px;
-
-    .player-match-stats-tab {
-      .team-image {
-        padding-right: $d11-spacer;
-      }
-    }
   }
 </style>

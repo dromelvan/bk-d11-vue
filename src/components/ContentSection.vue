@@ -14,5 +14,10 @@ export default {
   .content-section {
     position: relative;
     z-index: 1;
+
+    div:first-child {
+      padding-top: 0px;
+    }
   }
+
 </style>

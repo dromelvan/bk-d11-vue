@@ -9,28 +9,24 @@
       <header-context class="premier-league-context">
         <div class="period" v-if="smAndUp">{{ '2018-08-10' | moment("dddd, MMMM Do YYYY") }} to {{ '2019-05-11' | moment("dddd, MMMM Do YYYY") }}</div>
         <div class="period" v-else>{{ '2018-08-10' | moment("MMMM Do YYYY") }} to {{ '2019-05-11' | moment("MMMM Do YYYY") }}</div>
-        <v-icon v-if="smAndUp" class="ball-icon">mdi-soccer</v-icon>
+        <v-icon v-if="smAndUp" medium class="context-icon">mdi-soccer</v-icon>
         <div v-if="smAndUp" class="matches-played">380 matches played</div>
         <br v-if="xs">
         <div class="header-context-link-container">
           <router-link :to="{ name: 'matchDay', params: { id: 547 }}">
             Current match day
           </router-link>
-          <v-icon class="chevron-icon chevron-right-icon">mdi-chevron-right</v-icon>
+          <v-icon medium>mdi-chevron-right</v-icon>
         </div>
       </header-context>
 
-      <v-container class="background-picture-padding"/>
       <header-content-background>
-        <header-content>
-          <div class="premier-league-name">
-            <v-btn icon :to="{ name: 'premier-league', params: { id: premierLeague.id - 1 }}" class="previous-btn"><v-icon class="chevron-icon chevron-left-icon">mdi-chevron-left</v-icon></v-btn>
-            <template v-if="smAndUp">Premier League {{ premierLeague.seasonName }} League Table</template>
-            <template v-else>{{ premierLeague.seasonName }} PL Table</template>
-            <v-btn icon :to="{ name: 'premier-league', params: { id: premierLeague.id + 1 }}" class="next-btn"><v-icon class="chevron-icon chevron-right-icon">mdi-chevron-right</v-icon></v-btn>
-          </div>
+        <header-content class="premier-league-name">
+          <v-btn icon :to="{ name: 'premier-league', params: { id: premierLeague.id - 1 }}" class="previous-btn"><v-icon x-large>mdi-chevron-left</v-icon></v-btn>
+          <template v-if="smAndUp">Premier League {{ premierLeague.seasonName }} League Table</template>
+          <template v-else>{{ premierLeague.seasonName }} PL Table</template>
+          <v-btn icon :to="{ name: 'premier-league', params: { id: premierLeague.id + 1 }}" class="next-btn"><v-icon x-large>mdi-chevron-right</v-icon></v-btn>
         </header-content>
-        <v-container/>
       </header-content-background>
 
     </header-section>
@@ -139,41 +135,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .ball-icon {
-    padding-left: 0.5em;
-    padding-right: 0.25em;
-  }
-
-  .background-picture-padding {
-    margin-top: $d11-background-picture-padding;
-  }
-
-  .premier-league-name {
-    display: flex;
-    line-height: 2.3em;
-    padding-right: 0.25em;
-    padding-left: 0.25em;
-
-    .previous-btn,
-    .next-btn {
-      align-self: center;
-      color: white;
-      font-size: 1em;
-
-      .v-icon {
-        font-size: 1.75em;
-      }
-    }
-
-    .previous-btn {
-      margin-right: $d11-spacer;
-    }
-
-    .next-btn {
-      margin-left: auto;
-    }
-  }
-
   .premier-league-table {
     .ranking {
       min-width: 3em;
@@ -181,10 +142,6 @@ export default {
 
     .team {
       text-align: left;
-
-      .team-image {
-        padding-right: $d11-spacer;
-      }
     }
 
     .ranking-1 {
