@@ -5,11 +5,11 @@
         <v-list-item-content v-if="match">
           <v-list-item-title class="match">
             <span class="teams">
-              <team-image :version="'icon'" :id="match.homeTeamId"/>
-              {{ match.homeTeamName }}
+              <team-image :version="'icon'" :id="match.homeTeam.id"/>
+              {{ match.homeTeam.name }}
               <br>
-              <team-image :version="'icon'" :id="match.awayTeamId"/>
-              {{ match.awayTeamName }}
+              <team-image :version="'icon'" :id="match.awayTeam.id"/>
+              {{ match.awayTeam.name }}
             </span>
             <span class="score">
                 {{ match.homeTeamGoals }}<br>
@@ -39,7 +39,7 @@ import axios from 'axios'
 export default {
   name: 'MatchDayMatch',
   data: () => ({
-    match: {},
+    match: null,
     visible: false
   }),
   props: {

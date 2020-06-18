@@ -8,22 +8,22 @@
     <header-content-background>
       <header-content vertical class="match-result">
         <div class="team home">
-          <span class="team-image-container"><team-image :version="'tiny'" :id="match.homeTeamId"/></span>
-          <span class="team-name" v-if="match.homeTeamName.length < 16">{{ match.homeTeamName }}</span>
-          <span class="team-name" v-else>{{ match.homeTeamShortName }}</span>
+          <span class="team-image-container"><team-image :version="'tiny'" :id="match.homeTeam.id"/></span>
+          <span class="team-name" v-if="match.homeTeam.name.length < 16">{{ match.homeTeam.name }}</span>
+          <span class="team-name" v-else>{{ match.homeTeam.shortName }}</span>
           <span class="team-score emphasised">{{ match.homeTeamGoals }}</span>
         </div>
         <div class="team away">
-          <span class="team-image-container"><team-image :version="'tiny'" :id="match.awayTeamId"/></span>
-          <span class="team-name" v-if="match.awayTeamName.length < 16">{{ match.awayTeamName }}</span>
-          <span class="team-name" v-else>{{ match.awayTeamShortName }}</span>
+          <span class="team-image-container"><team-image :version="'tiny'" :id="match.awayTeam.id"/></span>
+          <span class="team-name" v-if="match.awayTeam.name.length < 16">{{ match.awayTeam.name }}</span>
+          <span class="team-name" v-else>{{ match.awayTeam.shortName }}</span>
           <span class="team-score emphasised">{{ match.awayTeamGoals }}</span>
         </div>
       </header-content>
 
       <v-container class="match-goals-container" v-if="match.homeTeamGoals > 0 || match.awayTeamGoals > 0">
         <div class="match-goals">
-          <div class="goal" v-bind:class="{ home: goal.teamId === match.homeTeamId, away: goal.teamId === match.awayTeamId }" v-for="goal in goals" :key="goal.id">
+          <div class="goal" v-bind:class="{ home: goal.team.id === match.homeTeam.id, away: goal.team.id === match.awayTeam.id }" v-for="goal in goals" :key="goal.id">
             <goal :goal="goal" :home="goal.home"/>
           </div>
         </div>
@@ -47,11 +47,11 @@ export default {
   computed: {
     goals: function () {
       var goals = []
-      this.match.matchEvents[this.match.homeTeamId].goals.forEach(goal => {
+      this.match.matchEvents[this.match.homeTeam.id].goals.forEach(goal => {
         goal.home = true
         goals.push(goal)
       })
-      this.match.matchEvents[this.match.awayTeamId].goals.forEach(goal => {
+      this.match.matchEvents[this.match.awayTeam.id].goals.forEach(goal => {
         goal.home = false
         goals.push(goal)
       })

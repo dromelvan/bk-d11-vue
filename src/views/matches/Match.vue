@@ -1,16 +1,16 @@
 <template>
   <div class="match" v-if="match">
 
-    <background-picture :type="'stadium'" :id="19" :alt="match.stadiumName"/>
+    <background-picture :type="'stadium'" :id="19" :alt="match.stadium.name"/>
 
     <header-section>
-      <header-navigation :link="{ name: 'matchDay', params: { id: match.matchDayId }}" :text="'Match Day ' + match.matchDayMatchDayNumber"/>
+      <header-navigation :link="{ name: 'matchDay', params: { id: match.matchDay.id }}" :text="'Match Day ' + match.matchDay.matchDayNumber"/>
 
       <header-context class="match-context">
         <div class="datetime">{{ match.datetime | moment("dddd, MMMM Do YYYY") }}</div>
         <br v-if="xs"/>
         <v-icon v-if="smAndUp" medium class="context-icon">mdi-stadium</v-icon>
-        <div class="stadium">{{ match.stadiumName }}, {{ match.stadiumCity }}</div>
+        <div class="stadium">{{ match.stadium.name }}, {{ match.stadium.city }}</div>
         <div v-if="smAndUp" class="header-context-link-container">
           <a class="header-context-link whoscored-link" target="_blank" :href="'https://www.whoscored.com/Matches/' + match.whoScoredId + '/'">View on WhoScored</a>
         </div>
@@ -27,17 +27,17 @@
       <v-container class="player-match-stats-container">
         <v-tabs :grow="xs" class="player-match-stats-tabs">
           <v-tab class="player-match-stats-tab">
-            <team-image :version="'tiny'" :id="match.homeTeamId"/>
-            <span v-if="smAndUp">{{ match.homeTeamName }} Stats</span>
-            <span v-if="xs">{{ match.homeTeamShortName }}</span>
+            <team-image :version="'tiny'" :id="match.homeTeam.id"/>
+            <span v-if="smAndUp">{{ match.homeTeam.name }} Stats</span>
+            <span v-if="xs">{{ match.homeTeam.shortName }}</span>
           </v-tab>
           <v-tab class="player-match-stats-tab">
-            <team-image :version="'tiny'" :id="match.awayTeamId"/>
-            <span v-if="smAndUp">{{ match.awayTeamName }} Stats</span>
-            <span v-if="xs">{{ match.awayTeamShortName }}</span>
+            <team-image :version="'tiny'" :id="match.awayTeam.id"/>
+            <span v-if="smAndUp">{{ match.awayTeam.name }} Stats</span>
+            <span v-if="xs">{{ match.awayTeam.shortName }}</span>
           </v-tab>
 
-          <v-tab-item v-for="teamId in [ match.homeTeamId, match.awayTeamId ]" :key="teamId">
+          <v-tab-item v-for="teamId in [ match.homeTeam.id, match.awayTeam.id ]" :key="teamId">
             <match-player-match-stats-horizontal v-if="smAndUp" :playerMatchStats="match.playerMatchStats[teamId]"/>
             <match-player-match-stats-vertical v-if="xs" :playerMatchStats="match.playerMatchStats[teamId]"/>
           </v-tab-item>

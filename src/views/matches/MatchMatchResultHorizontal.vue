@@ -7,13 +7,13 @@
 
     <header-content-background>
       <header-content class="match-result">
-        <div class="team home" v-if="mdAndUp || match.homeTeamName.length < 20">
-          <team-image :version="'small'" :id="match.homeTeamId"/>
-          {{ match.homeTeamName }}
+        <div class="team home" v-if="mdAndUp || match.homeTeam.name.length < 20">
+          <team-image :version="'small'" :id="match.homeTeam.id"/>
+          {{ match.homeTeam.name }}
         </div>
         <div class="team home" v-else>
-          <team-image :version="'small'" :id="match.homeTeamId"/>
-          {{ match.homeTeamShortName }}
+          <team-image :version="'small'" :id="match.homeTeam.id"/>
+          {{ match.homeTeam.shortName }}
         </div>
         <div class="emphasised" v-if="!pending(match.status)">
           <div class="score">
@@ -23,13 +23,13 @@
         <div v-else>
           <div class="score">vs</div>
         </div>
-        <div class="team away" v-if="mdAndUp || match.awayTeamName.length < 20">
-          {{ match.awayTeamName }}
-          <team-image :version="'small'" :id="match.awayTeamId"/>
+        <div class="team away" v-if="mdAndUp || match.awayTeam.name.length < 20">
+          {{ match.awayTeam.name }}
+          <team-image :version="'small'" :id="match.awayTeam.id"/>
         </div>
         <div class="team away" v-else>
-          {{ match.awayTeamShortName }}
-          <team-image :version="'small'" :id="match.awayTeamId"/>
+          {{ match.awayTeam.shortName }}
+          <team-image :version="'small'" :id="match.awayTeam.id"/>
         </div>
       </header-content>
 
@@ -40,10 +40,10 @@
       <v-container class="match-goals-container" v-if="match.homeTeamGoals > 0 || match.awayTeamGoals > 0">
         <div class="match-goals">
           <div class="goals home">
-            <goal v-for="goal in match.matchEvents[match.homeTeamId].goals" :key="goal.id" :goal="goal" :home="true"/>
+            <goal v-for="goal in match.matchEvents[match.homeTeam.id].goals" :key="goal.id" :goal="goal" :home="true"/>
           </div>
           <div class="goals away">
-            <goal v-for="goal in match.matchEvents[match.awayTeamId].goals" :key="goal.id" :goal="goal" :home="false"/>
+            <goal v-for="goal in match.matchEvents[match.awayTeam.id].goals" :key="goal.id" :goal="goal" :home="false"/>
           </div>
         </div>
       </v-container>

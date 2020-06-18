@@ -10,7 +10,7 @@ const routes = [
   { path: '/seasons/:id', name: 'season', component: () => import('@/views/seasons/Season.vue') },
   { path: '/match-days/:id', name: 'matchDay', component: () => import('@/views/match_days/MatchDay.vue') },
   { path: '/matches/:id', name: 'match', component: () => import('@/views/matches/Match.vue') },
-  { path: '/premier-leagues/:id', name: 'premier-league', component: () => import('@/views/premier_leagues/PremierLeague.vue') },
+  { path: '/premier-leagues/:id', name: 'premierLeague', component: () => import('@/views/premier_leagues/PremierLeague.vue') },
 
   { path: '/about/placeholder', name: 'placeholder' }
 ]

@@ -9,8 +9,8 @@
             Kick Off {{ match.datetime | moment("HH:mm")}}
           </span>
           <span class="team home">
-            {{ match.homeTeamName }}
-            <d11-image :type="'team'" :version="'tiny'" :id="match.homeTeamId"/>
+            {{ match.homeTeam.name }}
+            <d11-image :type="'team'" :version="'tiny'" :id="match.homeTeam.id"/>
           </span>
           <span class="score">
             <span v-if="this.pending(match.status)">
@@ -21,8 +21,8 @@
             </span>
           </span>
           <span class="team away">
-            <d11-image :type="'team'" :version="'tiny'" :id="match.awayTeamId"/>
-            {{ match.awayTeamName }}
+            <d11-image :type="'team'" :version="'tiny'" :id="match.awayTeam.id"/>
+            {{ match.awayTeam.name }}
           </span>
           <span class="elapsed">
             <v-progress-circular class="progress" v-if="this.active(match.status)" :rotate="-90" :size="35" :width="5" :value="this.elapsed(this.match.elapsed)" color="#061958">
@@ -39,31 +39,31 @@
     <v-expansion-panel-content class="match-events-content">
       <div v-if="match">
         <div class="match-events" v-if="!this.pending(match.status)">
-          <span class="stadium"> {{ match.stadiumName }}</span>
+          <span class="stadium"> {{ match.stadium.namee }}</span>
           <span class="events home">
-            <div class="events-container" v-if="match.matchEvents[match.homeTeamId].goals.length">
+            <div class="events-container" v-if="match.matchEvents[match.homeTeam.id].goals.length">
               <h4>Goals</h4>
               <ol class="goals">
-                <li class="goal" v-for="goal in match.matchEvents[match.homeTeamId].goals" :key="goal.id">
-                  {{ goal.playerName }} ({{ goal.time }})
+                <li class="goal" v-for="goal in match.matchEvents[match.homeTeam.id].goals" :key="goal.id">
+                  {{ goal.player.name }} ({{ goal.time }})
                   <goal-image :goal="goal"/>
                 </li>
               </ol>
             </div>
-            <div class="events-container" v-if="match.matchEvents[match.homeTeamId].cards.length">
+            <div class="events-container" v-if="match.matchEvents[match.homeTeam.id].cards.length">
               <h4>Cards</h4>
               <ol class="cards">
-                <li class="card" v-for="card in match.matchEvents[match.homeTeamId].cards" :key="card.id">
-                  {{ card.playerName }} ({{ card.time }})
+                <li class="card" v-for="card in match.matchEvents[match.homeTeam.id].cards" :key="card.id">
+                  {{ card.player.name }} ({{ card.time }})
                   <card-image :card="card"/>
                 </li>
               </ol>
             </div>
-            <div class="events-container" v-if="match.matchEvents[match.homeTeamId].substitutions.length">
+            <div class="events-container" v-if="match.matchEvents[match.homeTeam.id].substitutions.length">
               <h4>Subsitutions</h4>
               <ol class="subsitutions">
-                <li class="subsitutions" v-for="substitution in match.matchEvents[match.homeTeamId].substitutions" :key="substitution.id">
-                  {{ substitution.playerName }} ({{ substitution.time }}) <substitution-image :substitution="substitution" :playerOut="true"/><br>
+                <li class="subsitutions" v-for="substitution in match.matchEvents[match.homeTeam.id].substitutions" :key="substitution.id">
+                  {{ substitution.player.name }} ({{ substitution.time }}) <substitution-image :substitution="substitution" :playerOut="true"/><br>
                   {{ substitution.playerInName }} ({{ substitution.time }}) <substitution-image :substitution="substitution" :playerOut="false"/>
                 </li>
               </ol>
@@ -73,29 +73,29 @@
             &nbsp;
           </span>
           <span class="events away">
-            <div class="events-container" v-if="match.matchEvents[match.awayTeamId].goals.length">
+            <div class="events-container" v-if="match.matchEvents[match.awayTeam.id].goals.length">
               <h4>Goals</h4>
               <ol>
-                <li v-for="goal in match.matchEvents[match.awayTeamId].goals" :key="goal.id">
+                <li v-for="goal in match.matchEvents[match.awayTeam.id].goals" :key="goal.id">
                   <goal-image :goal="goal"/>
-                  ({{ goal.time }}) {{ goal.playerName }}
+                  ({{ goal.time }}) {{ goal.player.name }}
                 </li>
               </ol>
             </div>
-            <div class="events-container" v-if="match.matchEvents[match.awayTeamId].cards.length">
+            <div class="events-container" v-if="match.matchEvents[match.awayTeam.id].cards.length">
               <h4>Cards</h4>
               <ol class="cards">
-                <li class="card" v-for="card in match.matchEvents[match.awayTeamId].cards" :key="card.id">
+                <li class="card" v-for="card in match.matchEvents[match.awayTeam.id].cards" :key="card.id">
                   <card-image :card="card"/>
-                  {{ card.playerName }} ({{ card.time }})
+                  {{ card.player.name }} ({{ card.time }})
                 </li>
               </ol>
             </div>
-            <div class="events-container" v-if="match.matchEvents[match.awayTeamId].substitutions.length">
+            <div class="events-container" v-if="match.matchEvents[match.awayTeam.id].substitutions.length">
               <h4>Subsitutions</h4>
               <ol class="subsitutions">
-                <li class="subsitutions" v-for="substitution in match.matchEvents[match.awayTeamId].substitutions" :key="substitution.id">
-                  <substitution-image :substitution="substitution" :playerOut="true"/>{{ substitution.playerName }} ({{ substitution.time }})<br>
+                <li class="subsitutions" v-for="substitution in match.matchEvents[match.awayTeam.id].substitutions" :key="substitution.id">
+                  <substitution-image :substitution="substitution" :playerOut="true"/>{{ substitution.player.name }} ({{ substitution.time }})<br>
                   <substitution-image :substitution="substitution" :playerOut="false"/>{{ substitution.playerInName }} ({{ substitution.time }})
                 </li>
               </ol>

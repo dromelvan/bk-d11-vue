@@ -1,8 +1,8 @@
 <template>
   <div class="goal-container">
     <div class="goal home" v-if="home">
-      <span class="goal-text" v-if="smAndUp">{{ goal.playerName }} {{ goal.time }}'</span>
-      <span class="goal-text" v-if="xs">{{ goal.playerLastName }} {{ goal.time }}'</span>
+      <span class="goal-text" v-if="smAndUp">{{ goal.player.name }} {{ goal.time }}'</span>
+      <span class="goal-text" v-if="xs">{{ goal.player.lastName }} {{ goal.time }}'</span>
       <span class="goal-text" v-if="goal.penalty && smAndUp"> (pen)</span>
       <span class="goal-text" v-if="goal.penalty && xs"> (p)</span>
       <span class="goal-text" v-if="goal.ownGoal"> (og)</span>
@@ -15,8 +15,8 @@
       <span class="goal-text" v-if="goal.penalty && smAndUp">(pen) </span>
       <span class="goal-text" v-if="goal.penalty && xs">(p) </span>
       <span class="goal-text" v-if="goal.ownGoal">(og) </span>
-      <span class="goal-text" v-if="smAndUp">{{ goal.time }}' {{ goal.playerName }}</span>
-      <span class="goal-text" v-if="xs">{{ goal.time }}' {{ goal.playerLastName }}</span>
+      <span class="goal-text" v-if="smAndUp">{{ goal.time }}' {{ goal.player.name }}</span>
+      <span class="goal-text" v-if="xs">{{ goal.time }}' {{ goal.player.lastName }}</span>
     </div>
   </div>
 </template>

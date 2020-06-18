@@ -4,9 +4,9 @@
 
     <v-container class="d11-button-container">
       <v-btn icon class="previous-btn"><v-icon>mdi-chevron-left</v-icon></v-btn>
-      <h2>
-        <router-link :to="{ name: 'premier-league', params: { id: matchDay.premierLeagueId }}">
-          Premier League {{ matchDay.seasonName }}
+      <h2 >
+        <router-link :to="{ name: 'premierLeague', params: { id: matchDay.premierLeague.id }}">
+          Premier League {{ matchDay.season.name }}
         </router-link>
       </h2>
     </v-container>
@@ -64,7 +64,7 @@ export default {
     breadcrumbs: function () {
       var breadcrumbs = [
         { text: 'Home', disabled: false, to: { name: 'home' }, exact: true },
-        { text: 'Premier League', disabled: false, to: { name: 'premierLeague', params: { id: this.matchDay.premierLeagueId } } },
+        { text: 'Premier League', disabled: false, to: { name: 'premierLeague', params: { id: this.matchDay.premierLeague.id } } },
         { text: 'Results', disabled: true }
       ]
       return breadcrumbs

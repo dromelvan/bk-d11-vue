@@ -4,7 +4,7 @@
     <background-picture :type="'premier-league'" :id="16" :alt="'TODO'"/>
 
     <header-section>
-      <header-navigation :link="{ name: 'season', params: { id: premierLeague.seasonId }}" :text="'Season ' + premierLeague.seasonName"/>
+      <header-navigation :link="{ name: 'season', params: { id: premierLeague.season.id }}" :text="'Season ' + premierLeague.season.name"/>
 
       <header-context class="premier-league-context">
         <div class="period" v-if="smAndUp">{{ '2018-08-10' | moment("dddd, MMMM Do YYYY") }} to {{ '2019-05-11' | moment("dddd, MMMM Do YYYY") }}</div>
@@ -22,10 +22,10 @@
 
       <header-content-background>
         <header-content class="premier-league-name">
-          <v-btn icon :to="{ name: 'premier-league', params: { id: premierLeague.id - 1 }}" class="previous-btn"><v-icon x-large>mdi-chevron-left</v-icon></v-btn>
-          <template v-if="smAndUp">Premier League {{ premierLeague.seasonName }} League Table</template>
-          <template v-else>{{ premierLeague.seasonName }} PL Table</template>
-          <v-btn icon :to="{ name: 'premier-league', params: { id: premierLeague.id + 1 }}" class="next-btn"><v-icon x-large>mdi-chevron-right</v-icon></v-btn>
+          <v-btn icon :to="{ name: 'premierLeague', params: { id: premierLeague.id - 1 }}" class="previous-btn"><v-icon x-large>mdi-chevron-left</v-icon></v-btn>
+          <template v-if="smAndUp">Premier League {{ premierLeague.season.name }} League Table</template>
+          <template v-else>{{ premierLeague.season.name }} PL Table</template>
+          <v-btn icon :to="{ name: 'premierLeague', params: { id: premierLeague.id + 1 }}" class="next-btn"><v-icon x-large>mdi-chevron-right</v-icon></v-btn>
         </header-content>
       </header-content-background>
 
@@ -69,7 +69,7 @@
                 <span>Down {{ teamTableStat.ranking - teamTableStat.previousRanking }} positions from {{ teamTableStat.previousRanking }}</span>
               </v-tooltip>
             </div>
-            <div class="winner emphasised" v-if="smAndUp && finished(premierLeague.seasonStatus) && teamTableStat.ranking === 1">Winner</div>
+            <div class="winner emphasised" v-if="smAndUp && finished(premierLeague.season.status) && teamTableStat.ranking === 1">Winner</div>
             <div class="matches-played after-main-column">{{ teamTableStat.matchesPlayed }}</div>
             <template v-if="smAndUp">
               <div class="matches-won">{{ teamTableStat.matchesWon }}</div>
