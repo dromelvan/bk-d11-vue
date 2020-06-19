@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vue2Filters from 'vue2-filters'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -15,6 +16,7 @@ Vue.component('D11Image', () => import('@/components/D11Image'))
 Vue.component('TeamImage', () => import('@/components/TeamImage'))
 Vue.component('PlayerImage', () => import('@/components/PlayerImage'))
 
+Vue.use(Vue2Filters)
 Vue.use(require('vue-moment'))
 
 new Vue({
