@@ -1,5 +1,5 @@
 <template>
-  <img :src="`${baseURL}images/${type}/${version}/${id}.${fileType}`" @error="missing">
+  <img :class="version" :src="`${baseURL}images/${type}/${version}/${id}.${fileType}`" @error="missing">
 </template>
 
 <script>

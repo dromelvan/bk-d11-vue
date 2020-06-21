@@ -16,13 +16,14 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="scss">
+  // Not scoping this in order to make it easier to use whereever we want.
   .table-header-container,
   .table-row {
     display: flex;
     padding: $d11-spacer 0;
     line-height: 2.2em;
+    align-items: center;
 
     .main-column {
       margin-right: auto;
@@ -45,4 +46,10 @@ export default {
     min-width: 3.8em;
     text-align: center;
   }
+
+  .table-row.vertical {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
 </style>
