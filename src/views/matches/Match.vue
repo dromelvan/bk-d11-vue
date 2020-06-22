@@ -64,6 +64,8 @@ export default {
     match: null
   }),
   components: {
+    MatchMatchResultHorizontal: () => import('@/views/matches/MatchMatchResultHorizontal'),
+    MatchMatchResultVertical: () => import('@/views/matches/MatchMatchResultVertical'),
     MatchPlayerMatchStatsHorizontal: () => import('@/views/matches/MatchPlayerMatchStatsHorizontal'),
     MatchPlayerMatchStatsVertical: () => import('@/views/matches/MatchPlayerMatchStatsVertical')
   },
