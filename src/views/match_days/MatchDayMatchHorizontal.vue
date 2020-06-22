@@ -2,6 +2,32 @@
   <v-expansion-panel class="match-events">
     <v-expansion-panel-header class="match-events-header">
       <v-lazy v-model="visible" :options="{ threshold: .5 }" transition="fade-transition">
+        <div class="table-row" v-if="match">
+          <div class="kickoff">
+            Kick Off {{ match.datetime | moment("HH:mm")}}
+          </div>
+          <div class="team home">
+            {{ match.homeTeam.name }}
+            <d11-image :type="'team'" :version="'tiny'" :id="match.homeTeam.id"/>
+          </div>
+          <div class="score">
+            <template v-if="this.pending(match.status)">vs</template>
+            <template v-else>{{ match.homeTeamGoals }}-{{ match.awayTeamGoals }}</template>
+          </div>
+          <div class="team away">
+            <d11-image :type="'team'" :version="'tiny'" :id="match.awayTeam.id"/>
+            {{ match.awayTeam.name }}
+          </div>
+          <div class="elapsed">
+            <v-progress-circular class="progress" v-if="this.active(match.status)" :rotate="-90" :size="35" :width="5" :value="this.elapsed(this.match.elapsed)" color="#061958">
+              {{ match.elapsed }}
+            </v-progress-circular>
+            <template v-if="this.fullTime(match.status) || this.finished(match.status)">
+              Full Time
+            </template>
+          </div>
+        </div>
+        <!--
         <div class="match-events" v-if="match">
           <span class="kickoff">
             Kick Off {{ match.datetime | moment("HH:mm")}}
@@ -31,14 +57,15 @@
             </span>
           </span>
         </div>
+        -->
       </v-lazy>
     </v-expansion-panel-header>
 
     <v-expansion-panel-content class="match-events-content">
       <div v-if="match">
-        <div class="match-events" v-if="!this.pending(match.status)">
-          <span class="stadium"> {{ match.stadium.namee }}</span>
-          <span class="events home">
+        <div class="table-row match-events" v-if="!this.pending(match.status)">
+          <div class="stadium"> {{ match.stadium.namee }}</div>
+          <div class="events home">
             <div class="events-container" v-if="match.matchEvents[match.homeTeam.id].goals.length">
               <h4>Goals</h4>
               <ol class="goals">
@@ -66,11 +93,11 @@
                 </li>
               </ol>
             </div>
-          </span>
-          <span class="score">
+          </div>
+          <div class="score">
             &nbsp;
-          </span>
-          <span class="events away">
+          </div>
+          <div class="events away">
             <div class="events-container" v-if="match.matchEvents[match.awayTeam.id].goals.length">
               <h4>Goals</h4>
               <ol>
@@ -98,10 +125,10 @@
                 </li>
               </ol>
             </div>
-          </span>
-          <span class="match-stats">
+          </div>
+          <div class="match-stats">
             <v-btn :to="{ name: 'match', params: { id: match.id }}" link>Match Stats</v-btn>
-          </span>
+          </div>
         </div>
 
         <div class="match-preview" v-else>
@@ -143,31 +170,34 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .v-expansion-panel-header {
+    padding: 0;
+    min-height: 48px;
+  }
+
   .match-events {
-    display: table;
-    width: 100%;
-  }
-
-  .match-events-header {
-    min-height: 70px
-  }
-
-  .match-events-content {
-    padding-right: 24px;
-  }
-
-  .kickoff,
-  .stadium,
-  .team,
-  .score,
-  .elapsed,
-  .events,
-  .match-stats {
-    display: table-cell;
+    align-items: flex-start;
+    line-height: inherit;
   }
 
   .score {
+    width: 4%;
     text-align: center;
+  }
+
+  .kickoff,
+  .stadium {
+    width: 17%;
+  }
+
+  .team,
+  .events {
+    width: 33%;
+  }
+
+  .elapsed,
+  .match-stats {
+    width: 13%;
   }
 
   .team.home,
@@ -175,6 +205,7 @@ export default {
     text-align: right;
   }
 
+  .kickoff,
   .team.away,
   .events.away {
     text-align: left;
@@ -206,29 +237,11 @@ export default {
   .match-stats {
     text-align: right;
     position: relative;
+    margin-left: 24px;
     .v-btn {
       position: absolute;
       right: -24px;
     }
-  }
-
-  .kickoff,
-  .stadium {
-    width: 17%;
-  }
-
-  .team,
-  .events {
-    width: 33%;
-  }
-
-  .score {
-    width: 4%;
-  }
-
-  .elapsed,
-  .match-stats {
-    width: 13%;
   }
 
 </style>

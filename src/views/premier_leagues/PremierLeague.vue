@@ -19,7 +19,6 @@
       </header-context>
 
       <header-context v-if="xs" class="premier-league-context">
-        <!--<div class="matches-played">380 matches played</div> -->
         <div class="period" >{{ '2018-08-10' | moment("D.M YY") }} - {{ '2019-05-11' | moment("D.M YY") }}</div>
         <div class="header-context-link-container">
           <router-link :to="{ name: 'matchDay', params: { id: 547 }}">
@@ -32,8 +31,8 @@
       <header-content-background>
         <header-content class="premier-league-name">
           <v-btn icon :to="{ name: 'premierLeague', params: { id: premierLeague.id - 1 }}" class="previous-btn"><v-icon x-large>mdi-chevron-left</v-icon></v-btn>
-          <template v-if="smAndUp">Premier League {{ premierLeague.season.name }} League Table</template>
-          <template v-else>{{ premierLeague.season.name }} PL Table</template>
+          <template v-if="smAndUp">Premier League {{ premierLeague.season.name }}</template>
+          <template v-else>Prem. League 19-20</template>
           <v-btn icon :to="{ name: 'premierLeague', params: { id: premierLeague.id + 1 }}" class="next-btn"><v-icon x-large>mdi-chevron-right</v-icon></v-btn>
         </header-content>
       </header-content-background>
@@ -41,10 +40,14 @@
     </header-section>
 
     <content-section>
+      <v-container class="fixtures-and-results">
+        <h1>League Table</h1>
+      </v-container>
+
       <table-container class="premier-league-table">
 
         <template v-slot:header>
-          <div class="ranking">&nbsp;</div>
+          <div class="ranking">#</div>
           <div class="team">Team</div>
           <div class="matches-played after-main-column"><template v-if="smAndUp">Played</template><template v-else>Pl</template></div>
           <template v-if="smAndUp">
