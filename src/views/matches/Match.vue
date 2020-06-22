@@ -64,13 +64,6 @@ export default {
     match: null
   }),
   components: {
-    HeaderSection: () => import('@/components/header/HeaderSection'),
-    BackgroundPicture: () => import('@/components/header/BackgroundPicture'),
-    HeaderNavigation: () => import('@/components/header/HeaderNavigation'),
-    HeaderContext: () => import('@/components/header/HeaderContext'),
-    MatchMatchResultHorizontal: () => import('@/views/matches/MatchMatchResultHorizontal'),
-    MatchMatchResultVertical: () => import('@/views/matches/MatchMatchResultVertical'),
-    ContentSection: () => import('@/components/ContentSection'),
     MatchPlayerMatchStatsHorizontal: () => import('@/views/matches/MatchPlayerMatchStatsHorizontal'),
     MatchPlayerMatchStatsVertical: () => import('@/views/matches/MatchPlayerMatchStatsVertical')
   },

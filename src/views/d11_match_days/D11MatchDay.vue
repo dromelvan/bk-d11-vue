@@ -66,13 +66,6 @@ export default {
     d11MatchDay: null
   }),
   components: {
-    HeaderSection: () => import('@/components/header/HeaderSection'),
-    BackgroundPicture: () => import('@/components/header/BackgroundPicture'),
-    HeaderNavigation: () => import('@/components/header/HeaderNavigation'),
-    HeaderContext: () => import('@/components/header/HeaderContext'),
-    HeaderContent: () => import('@/components/header/HeaderContent'),
-    HeaderContentBackground: () => import('@/components/header/HeaderContentBackground'),
-    ContentSection: () => import('@/components/ContentSection'),
     TableContainer: () => import('@/components/TableContainer'),
     D11MatchDayD11MatchHorizontal: () => import('@/views/d11_match_days/D11MatchDayD11MatchHorizontal'),
     D11MatchDayD11MatchVertical: () => import('@/views/d11_match_days/D11MatchDayD11MatchVertical')
@@ -94,13 +87,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .d11-match-day {
-    .content-section {
-      .fixtures-and-results {
-        padding-top: $d11-spacer;
-      }
-    }
-  }
-</style>

@@ -109,13 +109,6 @@ export default {
     teamTableStats: null
   }),
   components: {
-    HeaderSection: () => import('@/components/header/HeaderSection'),
-    BackgroundPicture: () => import('@/components/header/BackgroundPicture'),
-    HeaderNavigation: () => import('@/components/header/HeaderNavigation'),
-    HeaderContext: () => import('@/components/header/HeaderContext'),
-    HeaderContent: () => import('@/components/header/HeaderContent'),
-    HeaderContentBackground: () => import('@/components/header/HeaderContentBackground'),
-    ContentSection: () => import('@/components/ContentSection'),
     TableUpIcon: () => import('@/components/match-events/TableUpIcon'),
     TableDownIcon: () => import('@/components/match-events/TableDownIcon'),
     TableContainer: () => import('@/components/TableContainer')
