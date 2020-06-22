@@ -1,24 +1,32 @@
 <template>
   <div class="match-day" v-if="matchDay">
-    <d11-header :breadcrumbs="breadcrumbs" text="Results"/>
 
-    <v-container class="d11-button-container">
-      <v-btn icon class="previous-btn"><v-icon>mdi-chevron-left</v-icon></v-btn>
-      <h2 >
-        <router-link :to="{ name: 'premierLeague', params: { id: matchDay.premierLeague.id }}">
-          Premier League {{ matchDay.season.name }}
-        </router-link>
-      </h2>
-    </v-container>
+    <background-picture :type="'match-day'" :id="7" :alt="'TODO'"/>
 
-    <v-divider/>
+    <header-section>
+      <header-navigation :link="{ name: 'premierLeague', params: { id: matchDay.premierLeague.id }}" :text="'Premier League ' + matchDay.season.name"/>
 
-    <previous-next-header :previous="{ name: 'matchDay', params: { id: matchDay.id - 1 }}" :next="{ name: 'matchDay', params: { id: matchDay.id + 1 }}" :text="'Match Day ' + matchDay.matchDayNumber"/>
+      <header-context v-if="smAndUp" class="match-day-context">
+        <div class="date">{{ matchDay.date | moment("dddd, MMMM Do YYYY") }}</div>
+        <div class="header-context-link-container">
+          <router-link :to="{ name: 'd11MatchDay', params: { id: matchDay.d11MatchDay.id }}">
+            D11 Match day {{ matchDay.d11MatchDay.matchDayNumber }}
+          </router-link>
+        </div>
+        <v-icon medium>mdi-chevron-right</v-icon>
+      </header-context>
 
-    <v-divider/>
+      <header-content-background>
+        <header-content class="match-day-name">
+          <v-btn icon :to="{ name: 'matchDay', params: { id: matchDay.id - 1 }}" class="previous-btn"><v-icon x-large>mdi-chevron-left</v-icon></v-btn>
+          Match Day {{ matchDay.matchDayNumber }} <template v-if="smAndUp">{{ matchDay.season.name }}</template>
+          <v-btn icon :to="{ name: 'matchDay', params: { id: matchDay.id + 1 }}" class="next-btn"><v-icon x-large>mdi-chevron-right</v-icon></v-btn>
+        </header-content>
+      </header-content-background>
+    </header-section>
 
-    <v-container>
-      <div class="main-content">
+    <content-section>
+      <v-container>
         <div class="match-date" v-for="date in Object.keys(matchDay.matches)" :key="date">
           <h4 class="match-date">{{ date | moment("dddd, MMMM Do YYYY") }}</h4>
 
@@ -34,8 +42,8 @@
           </v-list>
 
         </div>
-      </div>
-    </v-container>
+      </v-container>
+    </content-section>
 
   </div>
 </template>
@@ -56,19 +64,15 @@ export default {
     }
   },
   components: {
-    PreviousNextHeader: () => import('@/components/PreviousNextHeader'),
+    HeaderSection: () => import('@/components/header/HeaderSection'),
+    BackgroundPicture: () => import('@/components/header/BackgroundPicture'),
+    HeaderNavigation: () => import('@/components/header/HeaderNavigation'),
+    HeaderContext: () => import('@/components/header/HeaderContext'),
+    HeaderContent: () => import('@/components/header/HeaderContent'),
+    HeaderContentBackground: () => import('@/components/header/HeaderContentBackground'),
+    ContentSection: () => import('@/components/ContentSection'),
     MatchDayMatch: () => import('@/views/match_days/MatchDayMatch'),
     MatchDayMatchEvents: () => import('@/views/match_days/MatchDayMatchEvents')
-  },
-  computed: {
-    breadcrumbs: function () {
-      var breadcrumbs = [
-        { text: 'Home', disabled: false, to: { name: 'home' }, exact: true },
-        { text: 'Premier League', disabled: false, to: { name: 'premierLeague', params: { id: this.matchDay.premierLeague.id } } },
-        { text: 'Results', disabled: true }
-      ]
-      return breadcrumbs
-    }
   },
   mounted () {
     this.get()
@@ -82,11 +86,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .d11-button-container {
-    a {
-      text-decoration: none;
-    }
-  }
   .v-expansion-panels {
     padding-top: $d11-spacer;
   }

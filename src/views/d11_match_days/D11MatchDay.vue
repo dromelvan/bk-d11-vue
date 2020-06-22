@@ -19,8 +19,6 @@
       </header-context>
 
       <header-context v-if="xs" class="premier-league-context">
-<!--        <div class="date">{{ d11MatchDay.date | moment("dddd, MMMM Do YYYY") }}</div> -->
-<!--        <v-icon medium class="context-icon">mdi-account-multiple</v-icon> -->
         <div class="matches-played">13 players remaining</div>
         <div class="header-context-link-container">
           <router-link :to="{ name: 'matchDay', params: { id: d11MatchDay.matchDay.id }}">

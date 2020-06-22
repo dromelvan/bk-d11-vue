@@ -18,8 +18,6 @@
 
       <header-context v-if="xs" class="match-context">
         <div class="datetime">{{ match.datetime | moment("ddd, D.M YYYY") }}</div>
-        <!-- <v-icon medium class="context-icon">mdi-stadium</v-icon> -->
-<!--        <div class="stadium">{{ match.stadium.name }}, {{ match.stadium.city }}</div>-->
         <div class="header-context-link-container">
           <a class="header-context-link whoscored-link" target="_blank" :href="'https://www.whoscored.com/Matches/' + match.whoScoredId + '/'">View on WhoScored</a>
         </div>
