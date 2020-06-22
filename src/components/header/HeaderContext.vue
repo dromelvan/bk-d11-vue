@@ -44,11 +44,6 @@ export default {
   .v-application-xs {
     .header-context-container {
       margin-bottom: $d11-background-picture-padding / 2;
-
-      .header-context {
-        line-height: 1em;
-        display: inherit;
-      }
     }
   }
 

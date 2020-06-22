@@ -6,16 +6,28 @@
     <header-section>
       <header-navigation :link="{ name: 'd11League', params: { id: d11MatchDay.d11League.id }}" :text="'D11 ' + d11MatchDay.season.name"/>
 
-      <header-context class="premier-league-context">
+      <header-context v-if="smAndUp" class="premier-league-context">
         <div class="date">{{ d11MatchDay.date | moment("dddd, MMMM Do YYYY") }}</div>
-        <v-icon v-if="smAndUp" medium class="context-icon">mdi-account-multiple</v-icon>
+        <v-icon medium class="context-icon">mdi-account-multiple</v-icon>
         <div class="matches-played">13 players remaining</div>
         <div class="header-context-link-container">
           <router-link :to="{ name: 'matchDay', params: { id: d11MatchDay.matchDay.id }}">
             Match day {{ d11MatchDay.matchDay.matchDayNumber }}
           </router-link>
-          <v-icon medium>mdi-chevron-right</v-icon>
         </div>
+        <v-icon medium>mdi-chevron-right</v-icon>
+      </header-context>
+
+      <header-context v-if="xs" class="premier-league-context">
+<!--        <div class="date">{{ d11MatchDay.date | moment("dddd, MMMM Do YYYY") }}</div> -->
+<!--        <v-icon medium class="context-icon">mdi-account-multiple</v-icon> -->
+        <div class="matches-played">13 players remaining</div>
+        <div class="header-context-link-container">
+          <router-link :to="{ name: 'matchDay', params: { id: d11MatchDay.matchDay.id }}">
+            Match day {{ d11MatchDay.matchDay.matchDayNumber }}
+          </router-link>
+        </div>
+        <v-icon medium>mdi-chevron-right</v-icon>
       </header-context>
 
       <header-content-background>

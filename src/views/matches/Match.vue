@@ -6,15 +6,24 @@
     <header-section>
       <header-navigation :link="{ name: 'matchDay', params: { id: match.matchDay.id }}" :text="'Match Day ' + match.matchDay.matchDayNumber"/>
 
-      <header-context class="match-context">
+      <header-context v-if="smAndUp" class="match-context">
         <div class="datetime">{{ match.datetime | moment("dddd, MMMM Do YYYY") }}</div>
-        <br v-if="xs"/>
-        <v-icon v-if="smAndUp" medium class="context-icon">mdi-stadium</v-icon>
+        <v-icon medium class="context-icon">mdi-stadium</v-icon>
         <div class="stadium">{{ match.stadium.name }}, {{ match.stadium.city }}</div>
-        <div v-if="smAndUp" class="header-context-link-container">
+        <div class="header-context-link-container">
           <a class="header-context-link whoscored-link" target="_blank" :href="'https://www.whoscored.com/Matches/' + match.whoScoredId + '/'">View on WhoScored</a>
         </div>
-        <v-icon medium v-if="smAndUp">mdi-chevron-right</v-icon>
+        <v-icon medium>mdi-chevron-right</v-icon>
+      </header-context>
+
+      <header-context v-if="xs" class="match-context">
+        <div class="datetime">{{ match.datetime | moment("ddd, D.M YYYY") }}</div>
+        <!-- <v-icon medium class="context-icon">mdi-stadium</v-icon> -->
+<!--        <div class="stadium">{{ match.stadium.name }}, {{ match.stadium.city }}</div>-->
+        <div class="header-context-link-container">
+          <a class="header-context-link whoscored-link" target="_blank" :href="'https://www.whoscored.com/Matches/' + match.whoScoredId + '/'">View on WhoScored</a>
+        </div>
+        <v-icon medium>mdi-chevron-right</v-icon>
       </header-context>
 
       <match-match-result-horizontal :match="match" v-if="smAndUp"/>

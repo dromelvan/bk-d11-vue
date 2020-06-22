@@ -6,18 +6,27 @@
     <header-section>
       <header-navigation :link="{ name: 'season', params: { id: premierLeague.season.id }}" :text="'Season ' + premierLeague.season.name"/>
 
-      <header-context class="premier-league-context">
-        <div class="period" v-if="smAndUp">{{ '2018-08-10' | moment("dddd, MMMM Do YYYY") }} to {{ '2019-05-11' | moment("dddd, MMMM Do YYYY") }}</div>
-        <div class="period" v-else>{{ '2018-08-10' | moment("MMMM Do YYYY") }} to {{ '2019-05-11' | moment("MMMM Do YYYY") }}</div>
-        <v-icon v-if="smAndUp" medium class="context-icon">mdi-soccer</v-icon>
-        <div v-if="smAndUp" class="matches-played">380 matches played</div>
-        <br v-if="xs">
+      <header-context v-if="smAndUp" class="premier-league-context">
+        <div class="period" >{{ '2018-08-10' | moment("dddd, MMMM Do YYYY") }} to {{ '2019-05-11' | moment("dddd, MMMM Do YYYY") }}</div>
+        <v-icon medium class="context-icon">mdi-soccer</v-icon>
+        <div class="matches-played">380 matches played</div>
         <div class="header-context-link-container">
           <router-link :to="{ name: 'matchDay', params: { id: 547 }}">
             Current match day
           </router-link>
-          <v-icon medium>mdi-chevron-right</v-icon>
         </div>
+        <v-icon medium>mdi-chevron-right</v-icon>
+      </header-context>
+
+      <header-context v-if="xs" class="premier-league-context">
+        <!--<div class="matches-played">380 matches played</div> -->
+        <div class="period" >{{ '2018-08-10' | moment("D.M YY") }} - {{ '2019-05-11' | moment("D.M YY") }}</div>
+        <div class="header-context-link-container">
+          <router-link :to="{ name: 'matchDay', params: { id: 547 }}">
+            Current match day
+          </router-link>
+        </div>
+        <v-icon medium>mdi-chevron-right</v-icon>
       </header-context>
 
       <header-content-background>
