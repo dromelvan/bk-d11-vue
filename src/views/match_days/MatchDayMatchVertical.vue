@@ -30,6 +30,7 @@
         </v-list-item-content>
       </v-list-item>
     </v-lazy>
+    <v-divider/>
   </div>
 </template>
 
@@ -58,7 +59,6 @@ export default {
 <style lang="scss" scoped>
   .match-container {
     min-height: 84px;
-    border-top: $d11-divider-border;
 
     .v-list-item {
       padding-left: 0px;
@@ -68,10 +68,6 @@ export default {
     .v-list-item__subtitle {
       padding-top: $spacer;
     }
-  }
-
-  .match-container:last-child {
-      border-bottom: $d11-divider-border;
   }
 
   .match,

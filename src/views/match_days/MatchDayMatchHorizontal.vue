@@ -1,7 +1,5 @@
 <template>
   <v-expansion-panel class="match-events">
-    <v-divider/>
-
     <v-expansion-panel-header class="match-events-header">
       <v-lazy v-model="visible" :options="{ threshold: .5 }" transition="fade-transition">
         <div class="match-events" v-if="match">
@@ -113,6 +111,7 @@
       </div>
 
     </v-expansion-panel-content>
+    <v-divider/>
   </v-expansion-panel>
 </template>
 

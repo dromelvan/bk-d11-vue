@@ -16,6 +16,16 @@
         <v-icon medium>mdi-chevron-right</v-icon>
       </header-context>
 
+      <header-context v-if="xs" class="match-day-context">
+        <div class="date">{{ matchDay.date | moment("ddd, D.MM YYYY") }}</div>
+        <div class="header-context-link-container">
+          <router-link :to="{ name: 'd11MatchDay', params: { id: matchDay.d11MatchDay.id }}">
+            D11 Match day {{ matchDay.d11MatchDay.matchDayNumber }}
+          </router-link>
+        </div>
+        <v-icon medium>mdi-chevron-right</v-icon>
+      </header-context>
+
       <header-content-background>
         <header-content class="match-day-name">
           <v-btn icon :to="{ name: 'matchDay', params: { id: matchDay.id - 1 }}" class="previous-btn"><v-icon x-large>mdi-chevron-left</v-icon></v-btn>
@@ -26,23 +36,25 @@
     </header-section>
 
     <content-section>
-      <v-container>
-        <div class="match-date" v-for="date in Object.keys(matchDay.matches)" :key="date">
-          <h4 class="match-date">{{ date | moment("dddd, MMMM Do YYYY") }}</h4>
-
-          <div v-if="smAndUp" >
-            <v-expansion-panels multiple accordion tile flat>
-              <match-day-match-events v-for="matchId in matchDay.matches[date]" :key="matchId" :matchId="matchId"/>
-            </v-expansion-panels>
-            <v-divider/>
-          </div>
-
-          <v-list v-if="xs" flat>
-            <match-day-match v-for="matchId in matchDay.matches[date]" :key="matchId" :matchId="matchId"/>
-          </v-list>
-
-        </div>
+      <v-container class="fixtures-and-results">
+        <h1>Fixtures and Results</h1>
       </v-container>
+
+      <table-container class="d11-matches-table" v-for="date in Object.keys(matchDay.matches)" :key="date">
+        <template v-slot:header>
+          <div class="match-day-date">{{ date | moment("dddd, MMMM Do YYYY") }}</div>
+        </template>
+
+        <div v-if="smAndUp" >
+          <v-expansion-panels multiple accordion tile flat>
+            <match-day-match-horizontal v-for="matchId in matchDay.matches[date]" :key="matchId" :matchId="matchId"/>
+          </v-expansion-panels>
+        </div>
+
+        <v-list class="matches-by-date" v-if="xs" flat>
+          <match-day-match-vertical v-for="matchId in matchDay.matches[date]" :key="matchId" :matchId="matchId"/>
+        </v-list>
+      </table-container>
     </content-section>
 
   </div>
@@ -64,15 +76,9 @@ export default {
     }
   },
   components: {
-    HeaderSection: () => import('@/components/header/HeaderSection'),
-    BackgroundPicture: () => import('@/components/header/BackgroundPicture'),
-    HeaderNavigation: () => import('@/components/header/HeaderNavigation'),
-    HeaderContext: () => import('@/components/header/HeaderContext'),
-    HeaderContent: () => import('@/components/header/HeaderContent'),
-    HeaderContentBackground: () => import('@/components/header/HeaderContentBackground'),
-    ContentSection: () => import('@/components/ContentSection'),
-    MatchDayMatch: () => import('@/views/match_days/MatchDayMatch'),
-    MatchDayMatchEvents: () => import('@/views/match_days/MatchDayMatchEvents')
+    TableContainer: () => import('@/components/TableContainer'),
+    MatchDayMatchHorizontal: () => import('@/views/match_days/MatchDayMatchHorizontal'),
+    MatchDayMatchVertical: () => import('@/views/match_days/MatchDayMatchVertical')
   },
   mounted () {
     this.get()
@@ -86,21 +92,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .v-expansion-panels {
-    padding-top: $d11-spacer;
-  }
-
-  div.match-date:first-child {
-    padding-top: 8px;
-  }
-
-  div.match-date:not(:first-child) {
-    padding-top: 20px;
-  }
-
-  .v-application-xs {
-    div.match-date:not(:first-child) {
-      padding-top: $d11-large-spacer;
-    }
+  .matches-by-date {
+    padding: 0;
   }
  </style>

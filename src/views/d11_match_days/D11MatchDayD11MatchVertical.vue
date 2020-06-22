@@ -65,13 +65,15 @@ export default {
 
 <style lang="scss" scoped>
   .d11-match {
-    height: 82px;
+    height: 72px;
 
     .d11-match-rows {
       display: flex;
 
       .table-row.vertical {
         width: 100%;
+        padding: $d11-large-spacer 0;
+        line-height: inherit;
       }
 
       .d11-team {
