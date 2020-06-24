@@ -34,7 +34,7 @@
         <h1>Fixtures and Results</h1>
       </v-container>
 
-      <list-container class="d11-matches-list" v-for="date in Object.keys(d11MatchDay.d11Matches)" :key="'x' + date">
+      <list-container class="d11-matches-list" v-for="date in Object.keys(d11MatchDay.d11Matches)" :key="date">
         <template v-slot:header>
           <div class="d11-match-day-date">{{ date | moment("dddd, MMMM Do YYYY") }}</div>
         </template>

@@ -4,7 +4,7 @@
       <div class="d11-teams">
         <div class="d11-team home">
           <div class="image">
-            <d11-team-image style="align-self: center" :version="'icon'" :id="d11Match.homeD11Team.id"/>
+            <d11-team-image :version="'icon'" :id="d11Match.homeD11Team.id"/>
           </div>
           <div class="name main-item">
             {{ d11Match.homeD11Team.name }}

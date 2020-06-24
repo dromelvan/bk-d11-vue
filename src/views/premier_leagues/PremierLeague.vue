@@ -117,7 +117,6 @@ export default {
   components: {
     TableUpIcon: () => import('@/components/match-events/TableUpIcon'),
     TableDownIcon: () => import('@/components/match-events/TableDownIcon'),
-    // TableContainer: () => import('@/components/TableContainer')
     ListContainer: () => import('@/components/ListContainer'),
     ListContainerItem: () => import('@/components/ListContainerItem')
   },

@@ -40,11 +40,19 @@
         <h1>Fixtures and Results</h1>
       </v-container>
 
-      <table-container class="d11-matches-table" v-for="date in Object.keys(matchDay.matches)" :key="date">
+      <list-container class="matches-list" v-for="date in Object.keys(matchDay.matches)" :key="date">
         <template v-slot:header>
           <div class="match-day-date">{{ date | moment("dddd, MMMM Do YYYY") }}</div>
         </template>
+        <div v-for="matchId in matchDay.matches[date]" :key="matchId">
+          <list-container-item :to="{ name: 'match', params: { id: matchId }}">
+            <match-day-match-horizontal v-if="smAndUp" :matchId="matchId"/>
+            <match-day-match-vertical v-else :matchId="matchId"/>
+          </list-container-item>
+          <v-divider/>
+        </div>
 
+        <!--
         <div v-if="smAndUp" >
           <v-expansion-panels multiple accordion tile flat>
             <match-day-match-horizontal v-for="matchId in matchDay.matches[date]" :key="matchId" :matchId="matchId"/>
@@ -54,7 +62,8 @@
         <v-list class="matches-by-date" v-if="xs" flat>
           <match-day-match-vertical v-for="matchId in matchDay.matches[date]" :key="matchId" :matchId="matchId"/>
         </v-list>
-      </table-container>
+        -->
+      </list-container>
     </content-section>
 
   </div>
@@ -76,7 +85,8 @@ export default {
     }
   },
   components: {
-    TableContainer: () => import('@/components/TableContainer'),
+    ListContainer: () => import('@/components/ListContainer'),
+    ListContainerItem: () => import('@/components/ListContainerItem'),
     MatchDayMatchHorizontal: () => import('@/views/match_days/MatchDayMatchHorizontal'),
     MatchDayMatchVertical: () => import('@/views/match_days/MatchDayMatchVertical')
   },

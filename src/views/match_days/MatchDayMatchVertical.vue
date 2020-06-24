@@ -1,37 +1,59 @@
 <template>
-  <div class="match-container">
-    <v-lazy v-model="visible" :options="{ threshold: .5 }" transition="fade-transition">
-      <v-list-item :ripple='false' :to="{ name: 'match', params: { id: matchId }}" link>
-        <v-list-item-content v-if="match">
-          <v-list-item-title class="match">
-            <span class="teams">
+  <v-lazy class="match-lazy" v-model="visible" :options="{ threshold: .5 }" transition="fade-transition">
+    <diV v-if="match" class="match">
+      <v-list-item-title>
+        <div class="teams">
+          <div class="team home">
+            <div class="image">
               <team-image :version="'icon'" :id="match.homeTeam.id"/>
+            </div>
+            <div class="name main-item">
               {{ match.homeTeam.name }}
-              <br>
+            </div>
+            <template v-if="!pending(match.status)">
+              <div class="goals emphasised">
+                {{ match.homeTeamGoals }}
+              </div>
+            </template>
+            <template v-else>
+              <div class="preview">
+                Preview
+              </div>
+            </template>
+          </div>
+          <div class="team away">
+            <div class="image">
               <team-image :version="'icon'" :id="match.awayTeam.id"/>
+            </div>
+            <div class="name main-item">
               {{ match.awayTeam.name }}
-            </span>
-            <span class="score">
-                {{ match.homeTeamGoals }}<br>
+            </div>
+            <template v-if="!pending(match.status)">
+              <div class="goals emphasised">
                 {{ match.awayTeamGoals }}
-            </span>
-            <span class="chevron">
-                <v-icon>mdi-chevron-right</v-icon>
-            </span>
-          </v-list-item-title>
-          <v-list-item-subtitle class="times">
-            <span class="kickoff">
-              Kick Off <span v-if="match.datetime">{{ match.datetime | moment("HH:mm")}}</span>
-            </span>
-            <span class="elapsed">
-              {{ this.elapsedText(match.elapsed) }}
-            </span>
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
-    </v-lazy>
-    <v-divider/>
-  </div>
+              </div>
+            </template>
+            <template v-else>
+              <div class="preview">
+                Preview
+              </div>
+            </template>
+          </div>
+        </div>
+        <div>
+          <v-icon medium class="chevron-icon chevron-right-icon">mdi-chevron-right</v-icon>
+        </div>
+      </v-list-item-title>
+      <v-list-item-subtitle v-if="match" class="times">
+        <div class="kickoff">
+          Kick Off <template v-if="match.datetime">{{ match.datetime | moment("HH:mm")}}</template>
+        </div>
+        <div class="elapsed" v-if="!pending(match.status)">
+          {{ this.elapsedText(match.elapsed) }}
+        </div>
+      </v-list-item-subtitle>
+    </diV>
+  </v-lazy>
 </template>
 
 <script>
@@ -57,53 +79,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .match-container {
-    min-height: 84px;
-
-    .v-list-item {
-      padding-left: 0px;
-      padding-right: 0px;
-    }
-
-    .v-list-item__subtitle {
-      padding-top: $spacer;
-    }
-  }
-
-  .match,
-  .times {
-    display: table;
-    width: 100%;
-  }
-
-  .teams,
-  .score,
-  .chevron,
-  .kickoff {
-    display: table-cell;
-  }
-
   .teams {
+    padding: $d11-spacer 0;
     width: 100%;
+
+    .team {
+      display: flex;
+
+      .image {
+        display: flex;
+        align-items: center;
+        padding-right: $d11-spacer;
+      }
+
+      .goals {
+        min-width: 1.5em;
+        text-align: right;
+      }
+    }
   }
 
-  .score {
-      padding-right: $spacer;
-  }
+  .times {
+    padding-bottom: $d11-spacer;
+    display: flex;
 
-  .chevron {
-      vertical-align: middle;
-  }
+    .kickoff {
+      margin-right: auto;
+    }
 
-  .kickoff,
-  .elapsed {
-      display: table-cell;
-      width: 50%;
-  }
-
-  .elapsed {
-      text-align: right;
+    .elapsed {
       padding-right: 24px;
+    }
   }
-
 </style>
