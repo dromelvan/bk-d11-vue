@@ -62,7 +62,7 @@ export default {
   }),
   components: {
     ListContainer: () => import('@/components/ListContainer'),
-    // ListContainerItem: () => import('@/components/ListContainerItem'),
+    ListContainerItem: () => import('@/components/ListContainerItem'),
     D11MatchDayD11MatchHorizontal: () => import('@/views/d11_match_days/D11MatchDayD11MatchHorizontal'),
     D11MatchDayD11MatchVertical: () => import('@/views/d11_match_days/D11MatchDayD11MatchVertical')
   },
