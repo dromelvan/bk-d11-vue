@@ -22,13 +22,28 @@ export default {
     padding-top: 0;
 
     .list-container-header {
-      padding: $d11-spacer 0;
+      display: flex;
+      padding: 0;
+      padding-bottom: $d11-spacer;
       line-height: 2.2em;
       font-weight: 600;
     }
 
+    .list-container-header > * {
+      //min-width: 3.8em;
+      text-align: center;
+    }
+
     .v-list-item {
       padding: 0;
+    }
+
+    .main-item {
+      margin-right: auto;
+    }
+
+    .after-main-item {
+      margin-left: auto;
     }
 
     .v-list-item__content {
@@ -38,14 +53,6 @@ export default {
         display: flex;
         line-height: unset;
         align-items: center;
-
-        .main-item {
-          margin-right: auto;
-        }
-
-        .after-main-item {
-          margin-left: auto;
-        }
 
         .emphasised {
           font-weight: 600;

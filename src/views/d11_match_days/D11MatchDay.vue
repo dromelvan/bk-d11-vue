@@ -30,7 +30,7 @@
     </header-section>
 
     <content-section>
-      <v-container class="fixtures-and-results">
+      <v-container class="h1-container fixtures-and-results">
         <h1>Fixtures and Results</h1>
       </v-container>
 
