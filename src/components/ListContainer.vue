@@ -1,6 +1,6 @@
 <template>
   <v-container class="list-container">
-    <div class="list-container-header">
+    <div class="list-container-header" v-bind:class="{ 'narrow': narrowHeader }">
       <slot name="header"></slot>
     </div>
     <v-divider/>
@@ -12,7 +12,13 @@
 
 <script>
 export default {
-  name: 'ListContainer'
+  name: 'ListContainer',
+  props: {
+    narrowHeader: {
+      type: Boolean,
+      default: false
+    }
+  }
 }
 </script>
 
@@ -27,6 +33,10 @@ export default {
       padding-bottom: $d11-spacer;
       line-height: 2.2em;
       font-weight: 600;
+    }
+
+    .list-container-header.narrow {
+      padding-bottom: 0;
     }
 
     .list-container-header > * {
@@ -71,6 +81,12 @@ export default {
 
     .v-list-item__content > * {
       line-height: unset;
+    }
+  }
+
+  .v-tabs-items {
+    .list-container:first-child {
+      padding-top: $d11-large-spacer;
     }
   }
 </style>

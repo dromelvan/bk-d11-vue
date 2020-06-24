@@ -1,5 +1,5 @@
 <template>
-  <v-list-item two-line :ripple='false' :to="to" link>
+  <v-list-item :ripple='false' :to="to" link>
     <v-list-item-content>
       <slot></slot>
     </v-list-item-content>

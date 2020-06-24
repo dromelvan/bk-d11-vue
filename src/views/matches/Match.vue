@@ -80,5 +80,11 @@ export default {
 <style lang="scss" scoped>
   .player-match-stats-container {
     padding: 0px;
+
+    .player-match-stats-tab {
+      .team-image {
+        padding-right: $d11-spacer;
+      }
+    }
   }
 </style>
