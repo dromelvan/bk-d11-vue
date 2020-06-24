@@ -1,40 +1,66 @@
 <template>
-  <v-lazy class="d11-match" v-model="visible" :options="{ threshold: .5 }" transition="fade-transition">
-    <div class="d11-match-rows" v-if="d11Match">
-      <div class="table-row vertical">
+  <v-lazy class="d11-match-lazy" v-model="visible" :options="{ threshold: .5 }" transition="fade-transition">
+    <v-list-item-title v-if="d11Match" class="d11-match">
+      <div class="d11-teams">
         <div class="d11-team home">
-          <d11-team-image :version="'icon'" :id="d11Match.homeD11Team.id"/>
-          <div class="name home main-column">
+          <div class="image">
+            <d11-team-image style="align-self: center" :version="'icon'" :id="d11Match.homeD11Team.id"/>
+          </div>
+          <div class="name main-item">
             {{ d11Match.homeD11Team.name }}
           </div>
-          <template v-if="d11Match.homeD11Team.id in d11Match.remainingPlayerCount">
-            <div class="remaining-players home">
-              {{ d11Match.remainingPlayerCount[d11Match.homeD11Team.id] }}
+          <template v-if="!pending(d11Match.status)">
+            <template v-if="d11Match.homeD11Team.id in d11Match.remainingPlayerCount">
+              <div class="remaining-players">
+                {{ d11Match.remainingPlayerCount[d11Match.homeD11Team.id] }}
+              </div>
+              <v-icon medium class="remaining-players-icon">mdi-account-multiple</v-icon>
+            </template>
+            <div class="points">
+              {{ d11Match.homeTeamPoints }} pts
             </div>
-            <v-icon medium class="remaining-players-icon">mdi-account-multiple</v-icon>
+            <div class="goals emphasised">
+              {{ d11Match.homeTeamGoals }}
+            </div>
           </template>
-          <div class="points">
-            {{ d11Match.homeTeamPoints }} pts
-          </div>
-          <div class="goals">
-            {{ d11Match.homeTeamGoals }}
-          </div>
+          <template v-else>
+            <div class="preview">
+              Preview
+            </div>
+          </template>
         </div>
         <div class="d11-team away">
-          <d11-team-image :version="'icon'" :id="d11Match.awayD11Team.id"/>
-          <div class="name away main-column">{{ d11Match.awayD11Team.name }}</div>
-          <template v-if="d11Match.awayD11Team.id in d11Match.remainingPlayerCount">
-            <div class="remaining-players away">
-              {{ d11Match.remainingPlayerCount[d11Match.awayD11Team.id] }}
+          <div class="image">
+            <d11-team-image :version="'icon'" :id="d11Match.awayD11Team.id"/>
+          </div>
+          <div class="name main-item">
+            {{ d11Match.awayD11Team.name }}
+          </div>
+          <template v-if="!pending(d11Match.status)">
+            <template v-if="d11Match.awayD11Team.id in d11Match.remainingPlayerCount">
+              <div class="remaining-players">
+                {{ d11Match.remainingPlayerCount[d11Match.awayD11Team.id] }}
+              </div>
+              <v-icon medium class="remaining-players-icon">mdi-account-multiple</v-icon>
+            </template>
+            <div class="points">
+              {{ d11Match.awayTeamPoints }} pts
             </div>
-            <v-icon medium class="remaining-players-icon">mdi-account-multiple</v-icon>
+            <div class="goals emphasised">
+              {{ d11Match.awayTeamGoals }}
+            </div>
           </template>
-          <div class="points">{{ d11Match.awayTeamPoints }} pts</div>
-          <div class="goals">{{ d11Match.awayTeamGoals }}</div>
+          <template v-else>
+            <div class="preview">
+              Preview
+            </div>
+          </template>
         </div>
       </div>
-      <v-icon medium class="chevron-icon chevron-right-icon">mdi-chevron-right</v-icon>
-    </div>
+      <div>
+        <v-icon medium class="chevron-icon chevron-right-icon">mdi-chevron-right</v-icon>
+      </div>
+    </v-list-item-title>
   </v-lazy>
 </template>
 
@@ -64,48 +90,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .d11-match {
-    height: 72px;
+  .d11-match-lazy {
+    min-height: 60px;
+  }
 
-    .d11-match-rows {
+  .d11-teams {
+    padding: $d11-spacer 0;
+    width: 100%;
+
+    .d11-team {
       display: flex;
 
-      .table-row.vertical {
-        width: 100%;
-        padding: $d11-large-spacer 0;
-        line-height: inherit;
-      }
-
-      .d11-team {
+      .image {
         display: flex;
-        justify-content: center;
-        width: 100%;
-
-        .d11-team-image {
-          align-self: center;
-        }
-
-        .points,
-        .goals {
-          text-align: right;
-        }
-
-        .points {
-          min-width: 3em;
-        }
-
-        .goals {
-          min-width: 1.8em;
-          font-weight: 600;
-        }
-
-        .remaining-players-icon {
-          padding-left: $d11-spacer;
-        }
+        align-items: center;
+        padding-right: $d11-spacer;
       }
 
-      .chevron-right-icon {
-        padding-left: $d11-spacer;
+      .points {
+        min-width: 3em;
+        text-align: right;
+      }
+
+      .goals {
+        min-width: 1.5em;
+        text-align: right;
       }
     }
   }
