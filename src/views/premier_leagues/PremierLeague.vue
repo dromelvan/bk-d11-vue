@@ -1,7 +1,7 @@
 <template>
   <div class="premier-league" v-if="premierLeague">
 
-    <background-picture :type="'premier-league'" :id="16" :alt="'TODO'"/>
+    <background-picture :type="'league'" :id="16" :alt="'TODO'"/>
 
     <header-section>
       <header-navigation :link="{ name: 'season', params: { id: premierLeague.season.id }}" :text="'Season ' + premierLeague.season.name"/>
@@ -44,7 +44,7 @@
         <h1>League Table</h1>
       </v-container>
 
-      <list-container class="premier-league-table">
+      <list-container columns class="premier-league-table">
 
         <template v-slot:header>
           <div class="ranking">#</div>

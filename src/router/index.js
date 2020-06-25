@@ -11,7 +11,7 @@ const routes = [
   { path: '/premier-leagues/:id', name: 'premierLeague', component: () => import('@/views/premier_leagues/PremierLeague.vue') },
   { path: '/match-days/:id', name: 'matchDay', component: () => import('@/views/match_days/MatchDay.vue') },
   { path: '/matches/:id', name: 'match', component: () => import('@/views/matches/Match.vue') },
-  { path: '/d11-leagues/:id', name: 'd11League', component: () => import('@/views/home/Home.vue') },
+  { path: '/d11-leagues/:id', name: 'd11League', component: () => import('@/views/d11_leagues/D11League.vue') },
   { path: '/d11-match-days/:id', name: 'd11MatchDay', component: () => import('@/views/d11_match_days/D11MatchDay.vue') },
 
   { path: '/about/placeholder', name: 'placeholder' }

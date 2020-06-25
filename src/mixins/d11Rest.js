@@ -8,18 +8,17 @@ var d11Rest = {
       season: 'seasons/:id',
 
       premierLeague: 'premier-leagues/:id',
-
       matchDay: 'match-days/:id',
-
       match: 'matches/:id',
       matchEvents: 'matches/:id/events',
       matchStats: 'matches/:id/stats',
 
+      d11League: 'd11-leagues/:id',
       d11MatchDay: 'd11-match-days/:id',
-
       d11Match: 'd11-matches/:id',
 
-      teamTableStatsByMatchDayId: 'team-table-stats/match-day/:id'
+      teamTableStatsByMatchDayId: 'team-table-stats/match-day/:id',
+      d11TeamTableStatsByMatchDayId: 'd11-team-table-stats/d11-match-day/:id'
     }
   }),
   methods: {
