@@ -1,38 +1,49 @@
 <template>
   <div class="player-match-stats">
-    <v-container class="position-stats" v-for="position in Object.keys(playerMatchStats)" :key="position">
-      <div class="player-stat-names">
-        <div class="player-stat-name player">{{ position }}s</div>
-        <div class="player-stat-name points">P.</div>
-      </div>
-      <v-divider/>
+    <list-container columns class="position-stats" v-for="position in Object.keys(playerMatchStats)" :key="position">
+      <template v-slot:header>
+        <div class="position main-item">{{ position }}s</div>
+        <div class="points">P.</div>
+      </template>
 
       <div v-for="playerMatchStat in playerMatchStats[position]" :key="playerMatchStat.id">
-        <div class="player-stats" v-bind:class="{ 'man-of-the-match': playerMatchStat.manOfTheMatch || playerMatchStat.sharedManOfTheMatch }">
-          <div class="player-stat substitute" v-if="playerMatchStat.lineup === 1">SUB</div>
-          <div class="player-stat player">
-            <template v-if="playerMatchStat.player.name.length < 22">{{ playerMatchStat.player.name }}</template>
-            <template v-else>{{ playerMatchStat.player.shortName }}</template>
-          </div>
-          <div class="player-stat man-of-the-match" v-if="playerMatchStat.manOfTheMatch || playerMatchStat.sharedManOfTheMatch">
-            MoM
-          </div>
-          <div class="player-stat unused-substitute" v-if="playerMatchStat.lineup === 1 && playerMatchStat.substitutionOnTime === 0">
-            Unused Sub
-          </div>
-          <div v-else class="player-stat match-events">
-            <substitution-on-icon v-if="playerMatchStat.substitutionOnTime > 0"/>
-            <yellow-card-icon v-if="playerMatchStat.yellowCardTime > 0"/>
-            <red-card-icon v-if="playerMatchStat.redCardTime > 0"/>
-            <substitution-off-icon v-if="playerMatchStat.substitutionOffTime > 0"/>
-          </div>
-          <div class="player-stat points">
-            <span>{{ playerMatchStat.points}}</span>
-          </div>
-        </div>
+        <list-container-item :to="{ name: 'player', params: { id: playerMatchStat.player.id }}" v-bind:class="{ 'man-of-the-match': playerMatchStat.manOfTheMatch || playerMatchStat.sharedManOfTheMatch }">
+          <v-list-item-title class="player-stats">
+            <div class="substitute" v-if="playerMatchStat.lineup === 1">SUB</div>
+            <div class="player" v-bind:class="{ 'main-item': !playerMatchStat.manOfTheMatch && !playerMatchStat.sharedManOfTheMatch }">
+              <template v-if="playerMatchStat.player.name.length < 22">{{ playerMatchStat.player.name }}</template>
+              <template v-else>{{ playerMatchStat.player.shortName }}</template>
+            </div>
+            <div class="man-of-the-match main-item" v-if="playerMatchStat.manOfTheMatch || playerMatchStat.sharedManOfTheMatch">
+              MoM
+            </div>
+            <div class="unused-substitute" v-if="playerMatchStat.lineup === 1 && playerMatchStat.substitutionOnTime === 0">
+              Unused Sub
+            </div>
+            <div v-else class="match-events">
+              <template v-if="playerMatchStat.substitutionOnTime > 0">
+                <substitution-on-icon/> {{ playerMatchStat.substitutionOnTime }}'
+              </template>
+              <template v-if="playerMatchStat.yellowCardTime > 0">
+                <yellow-card-icon/>{{ playerMatchStat.yellowCardTime }}'
+              </template>
+              <template v-if="playerMatchStat.redCardTime > 0">
+                <red-card-icon/>{{ playerMatchStat.redCardTime }}'
+              </template>
+              <template v-if="playerMatchStat.substitutionOffTime > 0">
+                <substitution-off-icon/> {{ playerMatchStat.substitutionOffTime }}'
+              </template>
+            </div>
+            <div class="points">
+              {{ playerMatchStat.points}}
+            </div>
+
+          </v-list-item-title>
+        </list-container-item>
         <v-divider/>
       </div>
-    </v-container>
+
+    </list-container>
   </div>
 </template>
 
@@ -43,6 +54,8 @@ export default {
     playerMatchStats: Object
   },
   components: {
+    ListContainer: () => import('@/components/ListContainer'),
+    ListContainerItem: () => import('@/components/ListContainerItem'),
     YellowCardIcon: () => import('@/components/match-events/YellowCardIcon'),
     RedCardIcon: () => import('@/components/match-events/RedCardIcon'),
     SubstitutionOnIcon: () => import('@/components/match-events/SubstitutionOnIcon'),
@@ -52,60 +65,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .player-stat-names {
-    font-weight: 600;
-  }
+  .player-match-stats {
+    .v-list-item {
+      .points,
+      .substitute {
+        font-weight: 600;
+      }
 
-  .player-stats {
-    .points,
-    .substitute {
-      font-weight: 600;
-    }
-    .unused-substitute {
-      opacity: 0.6;
-    }
-  }
+      .substitute {
+        padding-right: $d11-spacer;
+      }
 
-  .player-stat-names,
-  .player-stats {
-    display: flex;
+      .unused-substitute {
+        opacity: 0.6;
+      }
 
-    .player-stat-name.player,
-    .player-stat.player {
-      margin-right: auto;
+      .unused-substitute,
+      .match-events {
+        margin-right: $d11-spacer;
+      }
     }
 
-    .player-stat {
-      line-height: 2em;
-    }
+    .v-list-item.man-of-the-match {
+      background-color: $d11-blue;
+      color: white;
 
-    .player-stat-name,
-    .player-stat {
-      padding: $d11-spacer;
-    }
-
-    .substitute {
-      padding-right: 0px;
-    }
-
-    .points {
-      width: 2em;
-      text-align: right;
-    }
-  }
-
-  .player-stats.man-of-the-match {
-    background-color: $d11-blue;
-    color: white;
-
-    .player-stat.player {
-        margin-right: unset;
-        padding-right: 0px;
-    }
-
-    .player-stat.man-of-the-match {
-      margin-right: auto;
-      font-weight: 600;
+      .man-of-the-match {
+        padding-left: $d11-spacer;
+        font-weight: 600;
+      }
     }
   }
 

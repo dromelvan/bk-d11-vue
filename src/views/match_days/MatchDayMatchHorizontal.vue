@@ -73,7 +73,7 @@ export default {
     }
 
     .team {
-      min-width: 13em;
+      min-width: 11.5em;
     }
     .team.home {
       margin-left: auto;

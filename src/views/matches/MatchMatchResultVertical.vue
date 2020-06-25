@@ -69,6 +69,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .match-goals-container {
+    padding-bottom: 0;
+  }
+
   .match-result {
     .header-content {
       .team {

@@ -1,6 +1,6 @@
 <template>
   <div class="player-match-stats">
-    <list-container narrowHeader class="position-stats" v-for="position in Object.keys(playerMatchStats)" :key="position">
+    <list-container columns class="position-stats" v-for="position in Object.keys(playerMatchStats)" :key="position">
       <template v-slot:header>
         <div class="position">{{ position }}s</div>
         <div class="goals after-main-item">
