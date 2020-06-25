@@ -14,6 +14,7 @@ Vue.config.productionTip = false
 Vue.component('D11Header', () => import('@/components/D11Header'))
 Vue.component('D11Image', () => import('@/components/D11Image'))
 Vue.component('TeamImage', () => import('@/components/TeamImage'))
+Vue.component('D11TeamImage', () => import('@/components/D11TeamImage'))
 Vue.component('PlayerImage', () => import('@/components/PlayerImage'))
 
 Vue.component('HeaderSection', () => import('@/components/header/HeaderSection'))

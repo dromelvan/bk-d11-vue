@@ -54,9 +54,6 @@ export default {
   props: {
     d11MatchId: Number
   },
-  components: {
-    D11TeamImage: () => import('@/components/D11TeamImage')
-  },
   watch: {
     visible: function () {
       axios
