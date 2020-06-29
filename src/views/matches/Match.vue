@@ -31,7 +31,7 @@
     </header-section>
 
     <content-section>
-      <v-container class="player-match-stats-container">
+      <v-container class="player-match-stats-container" v-if="playerMatchStats">
         <v-tabs :grow="xs" class="player-match-stats-tabs">
           <v-tab class="player-match-stats-tab">
             <team-image :version="'tiny'" :id="match.homeTeam.id"/>
@@ -45,8 +45,8 @@
           </v-tab>
 
           <v-tab-item v-for="teamId in [ match.homeTeam.id, match.awayTeam.id ]" :key="teamId">
-            <match-player-match-stats-horizontal v-if="smAndUp" :playerMatchStats="match.playerMatchStats[teamId]"/>
-            <match-player-match-stats-vertical v-if="xs" :playerMatchStats="match.playerMatchStats[teamId]"/>
+            <match-player-match-stats-horizontal v-if="smAndUp" :playerMatchStats="playerMatchStats[teamId]"/>
+            <match-player-match-stats-vertical v-if="xs" :playerMatchStats="playerMatchStats[teamId]"/>
           </v-tab-item>
         </v-tabs>
       </v-container>
@@ -61,7 +61,8 @@ import axios from 'axios'
 export default {
   name: 'Match',
   data: () => ({
-    match: null
+    match: null,
+    playerMatchStats: null
   }),
   components: {
     MatchMatchResultHorizontal: () => import('@/views/matches/MatchMatchResultHorizontal'),
@@ -71,8 +72,15 @@ export default {
   },
   mounted () {
     axios
-      .get(this.endpoint('matchStats', { id: this.$route.params.id }))
+      .get(this.endpoint('matchEvents', { id: this.$route.params.id }))
       .then(response => (this.match = response.data))
+  },
+  watch: {
+    match: function (match) {
+      axios
+        .get(this.endpoint('playerMatchStatsByMatchId', { id: match.id }))
+        .then(response => (this.playerMatchStats = response.data))
+    }
   }
 }
 </script>
