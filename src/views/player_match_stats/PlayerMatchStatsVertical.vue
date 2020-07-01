@@ -17,9 +17,17 @@
             <div class="man-of-the-match main-item" v-if="playerMatchStat.manOfTheMatch || playerMatchStat.sharedManOfTheMatch">
               MoM
             </div>
-            <div class="unused-substitute" v-if="playerMatchStat.lineup === 1 && playerMatchStat.substitutionOnTime === 0">
+
+            <div class="match-not-played" v-if="pending(playerMatchStat.match.status)">
+              {{ playerMatchStat.match.datetime | moment("DD.MM HH:mm") }}
+            </div>
+            <div class="did-not-participate" v-else-if="playerMatchStat.lineup === 0">
+              Did not participate
+            </div>
+            <div class="unused-substitute" v-else-if="playerMatchStat.lineup === 1 && playerMatchStat.substitutionOnTime === 0">
               Unused Sub
             </div>
+
             <div v-else class="match-events">
               <template v-if="playerMatchStat.substitutionOnTime > 0">
                 <substitution-on-icon/> {{ playerMatchStat.substitutionOnTime }}'
@@ -35,7 +43,9 @@
               </template>
             </div>
             <div class="points">
-              {{ playerMatchStat.points}}
+              <template v-if="!pending(playerMatchStat.match.status)">
+                {{ playerMatchStat.points}}
+              </template>
             </div>
 
           </v-list-item-title>
@@ -49,7 +59,7 @@
 
 <script>
 export default {
-  name: 'MatchPlayerMatchStatsVertical',
+  name: 'PlayerMatchStatsVertical',
   props: {
     playerMatchStats: Object
   },
@@ -76,10 +86,14 @@ export default {
         padding-right: $d11-spacer;
       }
 
+      .match-not-played,
+      .did-not-participate,
       .unused-substitute {
         opacity: 0.6;
       }
 
+      .match-not-played,
+      .did-not-participate,
       .unused-substitute,
       .match-events {
         margin-right: $d11-spacer;

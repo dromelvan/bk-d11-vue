@@ -45,8 +45,8 @@
           </v-tab>
 
           <v-tab-item v-for="teamId in [ match.homeTeam.id, match.awayTeam.id ]" :key="teamId">
-            <match-player-match-stats-horizontal v-if="smAndUp" :playerMatchStats="playerMatchStats[teamId]"/>
-            <match-player-match-stats-vertical v-if="xs" :playerMatchStats="playerMatchStats[teamId]"/>
+            <player-match-stats-horizontal v-if="smAndUp" :view="'match'" :playerMatchStats="playerMatchStats[teamId]"/>
+            <player-match-stats-vertical v-if="xs" :playerMatchStats="playerMatchStats[teamId]"/>
           </v-tab-item>
         </v-tabs>
       </v-container>
@@ -67,8 +67,8 @@ export default {
   components: {
     MatchMatchResultHorizontal: () => import('@/views/matches/MatchMatchResultHorizontal'),
     MatchMatchResultVertical: () => import('@/views/matches/MatchMatchResultVertical'),
-    MatchPlayerMatchStatsHorizontal: () => import('@/views/matches/MatchPlayerMatchStatsHorizontal'),
-    MatchPlayerMatchStatsVertical: () => import('@/views/matches/MatchPlayerMatchStatsVertical')
+    PlayerMatchStatsHorizontal: () => import('@/views/player_match_stats/PlayerMatchStatsHorizontal'),
+    PlayerMatchStatsVertical: () => import('@/views/player_match_stats/PlayerMatchStatsVertical')
   },
   mounted () {
     axios
