@@ -19,7 +19,7 @@
             </div>
 
             <div class="match-not-played" v-if="pending(playerMatchStat.match.status)">
-              {{ playerMatchStat.match.datetime | moment("DD.MM HH:mm") }}
+              K/O {{ playerMatchStat.match.datetime | moment("DD.MM YYYY HH:mm") }}
             </div>
             <div class="did-not-participate" v-else-if="playerMatchStat.lineup === 0">
               Did not participate

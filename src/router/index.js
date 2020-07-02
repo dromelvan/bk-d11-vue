@@ -13,6 +13,7 @@ const routes = [
   { path: '/matches/:id', name: 'match', component: () => import('@/views/matches/Match.vue') },
   { path: '/d11-leagues/:id', name: 'd11League', component: () => import('@/views/d11_leagues/D11League.vue') },
   { path: '/d11-match-days/:id', name: 'd11MatchDay', component: () => import('@/views/d11_match_days/D11MatchDay.vue') },
+  { path: '/d11-match/:id', name: 'd11Match', component: () => import('@/views/d11_matches/D11Match.vue') },
 
   { path: '/about/placeholder', name: 'placeholder' }
 ]

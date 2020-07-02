@@ -17,6 +17,7 @@ var d11Rest = {
       d11Match: 'd11-matches/:id',
 
       playerMatchStatsByMatchId: 'player-match-stats/match/:id',
+      playerMatchStatsByD11MatchId: 'player-match-stats/d11-match/:id',
 
       teamTableStatsByMatchDayId: 'team-table-stats/match-day/:id',
       d11TeamTableStatsByMatchDayId: 'd11-team-table-stats/d11-match-day/:id'
