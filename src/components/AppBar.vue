@@ -31,8 +31,9 @@
 
       <v-spacer></v-spacer>
 
+      <login-dialog/>
       <a class="menu-link">Sign Up</a>
-      <a class="menu-link">Sign In</a>
+
     </template>
   </v-app-bar>
 </template>
@@ -42,7 +43,10 @@ import navigation from '@/mixins/navigation'
 
 export default {
   name: 'AppBar',
-  mixins: [navigation]
+  mixins: [navigation],
+  components: {
+    LoginDialog: () => import('@/views/authentication/LoginDialog')
+  }
 }
 </script>
 

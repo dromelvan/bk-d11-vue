@@ -3,6 +3,8 @@
 var d11Rest = {
   data: () => ({
     endpoints: {
+      authenticate: 'authenticate',
+
       seasons: 'seasons',
       seasonIds: 'seasons/ids',
       season: 'seasons/:id',
