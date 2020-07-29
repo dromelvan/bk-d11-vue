@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import AuthenticationService from '../services/authentication.service'
 
 Vue.use(Vuex)
 
@@ -13,24 +12,21 @@ var initialState = {
 export default new Vuex.Store({
   state: initialState,
   mutations: {
-    loginSuccess (state, token) {
+    loggedIn (state, token) {
       localStorage.setItem('d11-token', JSON.stringify(token))
       state.status.loggedIn = true
     },
-    loginFailure (state) {
+    loggedOut (state) {
       localStorage.removeItem('d11-token')
       state.status.loggedIn = false
     }
   },
   actions: {
-    async login ({ commit }, credentials) {
-      try {
-        const response = await AuthenticationService.login(credentials)
-        commit('loginSuccess', response.data.token)
-      } catch (error) {
-        commit('loginFailure')
-        throw error
-      }
+    login ({ commit }, token) {
+      commit('loggedIn', token)
+    },
+    logout ({ commit }) {
+      commit('loggedOut')
     }
   },
   modules: {

@@ -43,6 +43,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
+import AuthenticationService from '../../services/authentication.service'
 
 export default {
   name: 'LoginDialog',
@@ -87,7 +88,7 @@ export default {
         this.step = 2
         this.failed = false
 
-        var login = this.$store.dispatch('login', this.credentials)
+        var login = AuthenticationService.login(this.credentials)
           .catch(() => { this.failed = true })
 
         // It just feels a bit better if we show the "logging in" notification for at least a few seconds.
