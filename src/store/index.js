@@ -23,15 +23,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    login ({ commit }, credentials) {
-      return AuthenticationService.login(credentials)
-        .then(response => {
-          commit('loginSuccess', response.data.token)
-        })
-        .catch(error => {
-          commit('loginFailure')
-          throw error
-        })
+    async login ({ commit }, credentials) {
+      try {
+        const response = await AuthenticationService.login(credentials)
+        commit('loginSuccess', response.data.token)
+      } catch (error) {
+        commit('loginFailure')
+        throw error
+      }
     }
   },
   modules: {
