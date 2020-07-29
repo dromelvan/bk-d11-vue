@@ -4,14 +4,14 @@
       <a class="menu-link" v-bind="attrs" v-on="on">Sign In</a>
     </template>
     <v-card v-if="visible">
-      <v-card-title style="font-size: 1.5rem">
-        <div style="display: flex; width: 100%;">
-          <div style="width: 100%; text-align: center; padding-left: 16px">Sign In</div>
-          <v-icon style="height: 16px; padding-top: 16px" @click="visible = false" small>mdi-close</v-icon>
+      <v-card-title>
+        <div class="dialog-title-container">
+          <div class="dialog-title">Sign In</div>
+          <v-icon class="close-icon" @click="visible = false" small>mdi-close</v-icon>
         </div>
       </v-card-title>
 
-      <div class="text-center">
+      <div class="avatar-container">
         <v-avatar size="62">
           <img src="@/assets/images/d11-avatar.png" alt="D11">
         </v-avatar>
@@ -19,19 +19,19 @@
 
       <v-window v-model="step">
         <v-window-item :value="1">
-          <v-card-text style="min-height: 260px">
+          <v-card-text>
             <form v-on:submit.prevent="submit">
 
-              <v-text-field label="Email*" name="email" id="email" v-model="credentials.username" @input="$v.credentials.username.$touch(); invalidPassword = false" :error-messages="emailErrors" outlined autofocus></v-text-field>
-              <v-text-field label="Password*" name="password" id="password" v-model="credentials.password" @input="$v.credentials.password.$touch(); invalidPassword = false" :error-messages="passwordErrors" :type="'password'" outlined></v-text-field>
+              <v-text-field label="Email*" name="email" id="email" v-model="credentials.username" @input="$v.credentials.username.$touch(); credentials.valid = true" :error-messages="emailErrors" outlined autofocus></v-text-field>
+              <v-text-field label="Password*" name="password" id="password" v-model="credentials.password" @input="$v.credentials.password.$touch(); credentials.valid = true" :error-messages="passwordErrors" :type="'password'" outlined></v-text-field>
 
-              <v-btn type="submit" style="height: 50px; width: 100%">Log In</v-btn>
+              <v-btn class="dialog-btn" type="submit">Log In</v-btn>
             </form>
 
           </v-card-text>
         </v-window-item>
         <v-window-item :value="2">
-          <v-card-text style="min-height: 260px">
+          <v-card-text>
             Logging in...
           </v-card-text>
         </v-window-item>
@@ -41,7 +41,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import { validationMixin } from 'vuelidate'
 import { required, email } from 'vuelidate/lib/validators'
 
@@ -62,8 +61,7 @@ export default {
         username: null,
         password: null,
         valid: true
-      },
-      token: null
+      }
     }
   },
   computed: {
@@ -78,7 +76,7 @@ export default {
       const errors = []
       if (!this.$v.credentials.password.$dirty) return errors
       !this.$v.credentials.password.required && errors.push('Password is required')
-      if (!this.credentials.valid) errors.push('Invalid email or password')
+      if (!this.credentials.valid && this.step === 1) errors.push('Invalid email or password')
       return errors
     }
   },
@@ -89,21 +87,19 @@ export default {
         this.step = 2
         this.credentials.valid = true
 
-        var promise = axios.post(this.endpoint('authenticate', {}), this.credentials)
-        promise
-          .then(response => { this.token = response.data.token })
-          .catch(() => { this.credentials.valid = false })
+        var login = this.$store.dispatch('login', this.credentials)
 
         // It just feels a bit better if we show the "logging in" notification for at least a few seconds.
         var timer = new Promise((resolve, reject) => {
           setTimeout(() => { resolve() }, 2000)
         })
 
-        Promise.allSettled([promise, timer]).then(() => {
+        Promise.allSettled([login, timer]).then(() => {
           if (this.credentials.valid) {
-            console.log('Logged in with token: ' + this.token)
+            console.log('Logged in with token: ' + localStorage.getItem('d11-token'))
             this.visible = false
           } else {
+            console.log('Failed to login, token: ' + localStorage.getItem('d11-token'))
             this.step = 1
           }
         })
@@ -117,8 +113,7 @@ export default {
         this.step = 1
         this.credentials.username = null
         this.credentials.password = null
-        this.credentials.valid = null
-        this.token = null
+        this.credentials.valid = true
       }
     }
   }
@@ -130,7 +125,41 @@ export default {
     color: white;
   }
 
-  // .v-window-item {
-  //   min-height: 500px;
-  // }
+  .v-dialog {
+    .v-card {
+      .v-card__title {
+        font-size: 1.5rem;
+      }
+
+      .v-card__text {
+        min-height: 260px;
+      }
+    }
+
+    .dialog-title-container {
+      display: flex;
+      width: 100%;
+
+      .dialog-title {
+        width: 100%;
+        text-align: center;
+        padding-left: 16px
+      }
+
+      .close-icon {
+        height: 16px;
+        padding-top: 16px;
+      }
+    }
+
+    .avatar-container {
+      text-align: center;
+      width: 100%;
+    }
+
+    .dialog-btn {
+      height: 50px;
+      width: 100%;
+    }
+  }
 </style>
