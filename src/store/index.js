@@ -28,8 +28,9 @@ export default new Vuex.Store({
         .then(response => {
           commit('loginSuccess', response.data.token)
         })
-        .catch(() => {
+        .catch(error => {
           commit('loginFailure')
+          throw error
         })
     }
   },

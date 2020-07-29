@@ -6,11 +6,10 @@ const AuthenticationService = {
     return axios
       .post(RestService.endpoint('authenticate', {}), credentials)
       .then(response => {
-        credentials.valid = true
         return Promise.resolve(response)
       })
-      .catch(() => {
-        credentials.valid = false
+      .catch(error => {
+        return Promise.reject(error)
       })
   }
 }

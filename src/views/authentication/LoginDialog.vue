@@ -22,8 +22,8 @@
           <v-card-text>
             <form v-on:submit.prevent="submit">
 
-              <v-text-field label="Email*" name="email" id="email" v-model="credentials.username" @input="$v.credentials.username.$touch(); credentials.valid = true" :error-messages="emailErrors" outlined autofocus></v-text-field>
-              <v-text-field label="Password*" name="password" id="password" v-model="credentials.password" @input="$v.credentials.password.$touch(); credentials.valid = true" :error-messages="passwordErrors" :type="'password'" outlined></v-text-field>
+              <v-text-field label="Email*" name="email" id="email" v-model="credentials.username" @input="$v.credentials.username.$touch(); failed = false" :error-messages="emailErrors" outlined autofocus></v-text-field>
+              <v-text-field label="Password*" name="password" id="password" v-model="credentials.password" @input="$v.credentials.password.$touch(); failed = false" :error-messages="passwordErrors" :type="'password'" outlined></v-text-field>
 
               <v-btn class="dialog-btn" type="submit">Log In</v-btn>
             </form>
@@ -59,9 +59,9 @@ export default {
       step: 1,
       credentials: {
         username: null,
-        password: null,
-        valid: true
-      }
+        password: null
+      },
+      failed: false
     }
   },
   computed: {
@@ -76,7 +76,7 @@ export default {
       const errors = []
       if (!this.$v.credentials.password.$dirty) return errors
       !this.$v.credentials.password.required && errors.push('Password is required')
-      if (!this.credentials.valid && this.step === 1) errors.push('Invalid email or password')
+      if (this.failed && this.step === 1) errors.push('Login failed for the provided email and password')
       return errors
     }
   },
@@ -85,9 +85,10 @@ export default {
       this.$v.$touch()
       if (!this.$v.$invalid) {
         this.step = 2
-        this.credentials.valid = true
+        this.failed = false
 
         var login = this.$store.dispatch('login', this.credentials)
+          .catch(() => { this.failed = true })
 
         // It just feels a bit better if we show the "logging in" notification for at least a few seconds.
         var timer = new Promise((resolve, reject) => {
@@ -95,7 +96,7 @@ export default {
         })
 
         Promise.allSettled([login, timer]).then(() => {
-          if (this.credentials.valid) {
+          if (!this.failed) {
             console.log('Logged in with token: ' + localStorage.getItem('d11-token'))
             this.visible = false
           } else {
@@ -113,7 +114,7 @@ export default {
         this.step = 1
         this.credentials.username = null
         this.credentials.password = null
-        this.credentials.valid = true
+        this.failed = true
       }
     }
   }
