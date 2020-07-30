@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 var initialState = {
   status: {
-    loggedIn: localStorage.getItem('d11-token') === null
+    loggedIn: localStorage.getItem('d11-token') !== null
   }
 }
 
