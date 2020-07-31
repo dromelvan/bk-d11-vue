@@ -55,8 +55,8 @@ export default {
     LoginDialog: () => import('@/views/authentication/LoginDialog')
   },
   methods: {
-    onLoggingIn: function (bur) {
-      this.loggingIn = bur
+    onLoggingIn: function (value) {
+      this.loggingIn = value
     },
     logout: function () {
       AuthenticationService.logout()

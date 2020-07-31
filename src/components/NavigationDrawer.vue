@@ -10,19 +10,51 @@
           <v-list-item-title>{{ link.text }}</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
+
+      <v-list-item-group>
+        <v-list-item v-if="!loggedIn() || loggingIn">
+          <v-list-item-title>
+            <login-dialog @logging-in="onLoggingIn"/>
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item v-if="!loggedIn() || loggingIn">
+          <v-list-item-title>
+            Sign Up
+          </v-list-item-title>
+        </v-list-item>
+        <v-list-item v-if="loggedIn()" @click="logout(); show = false">
+          <v-list-item-title>
+            Sign Out
+          </v-list-item-title>
+        </v-list-item>
+      </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
 import navigation from '@/mixins/navigation'
+import AuthenticationService from '../services/authentication.service'
 
 export default {
   name: 'NavigationDrawer',
   mixins: [navigation],
   data: function () {
     return {
-      show: false
+      show: false,
+      loggingIn: false
+    }
+  },
+  components: {
+    LoginDialog: () => import('@/views/authentication/LoginDialog')
+  },
+  methods: {
+    onLoggingIn: function (value) {
+      this.loggingIn = value
+      this.show = false
+    },
+    logout: function () {
+      AuthenticationService.logout()
     }
   },
   mounted () {

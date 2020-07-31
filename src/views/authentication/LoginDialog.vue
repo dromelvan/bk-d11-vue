@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="350" v-model="visible">
+  <v-dialog :fullscreen="xs" max-width="350" v-model="visible">
     <template v-slot:activator="{ on, attrs }">
       <a class="menu-link" v-bind="attrs" v-on="on">Sign In</a>
     </template>
