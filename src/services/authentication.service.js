@@ -13,6 +13,9 @@ const AuthenticationService = {
       store.dispatch('logout')
       return Promise.reject(error)
     }
+  },
+  logout () {
+    store.dispatch('logout')
   }
 }
 
