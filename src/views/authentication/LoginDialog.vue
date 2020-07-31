@@ -110,7 +110,11 @@ export default {
   },
   watch: {
     visible: function () {
+      if (this.visible) {
+        this.$emit('logging-in', true)
+      }
       if (!this.visible) {
+        this.$emit('logging-in', false)
         this.$v.$reset()
         this.step = 1
         this.credentials.username = null

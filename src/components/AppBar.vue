@@ -31,21 +31,36 @@
 
       <v-spacer></v-spacer>
 
-      <login-dialog/>
-      <a class="menu-link">Sign Up</a>
+      <login-dialog @logging-in="onLoggingIn" v-if="!loggedIn() || loggingIn"/>
+      <a class="menu-link" v-if="!loggedIn() || loggingIn">Sign Up</a>
 
-    </template>
+      <a class="menu-link" v-if="loggedIn() && !loggingIn" @click="logout()">Sign Out</a>
+   </template>
   </v-app-bar>
 </template>
 
 <script>
 import navigation from '@/mixins/navigation'
+import AuthenticationService from '../services/authentication.service'
 
 export default {
   name: 'AppBar',
   mixins: [navigation],
+  data () {
+    return {
+      loggingIn: false
+    }
+  },
   components: {
     LoginDialog: () => import('@/views/authentication/LoginDialog')
+  },
+  methods: {
+    onLoggingIn: function (bur) {
+      this.loggingIn = bur
+    },
+    logout: function () {
+      AuthenticationService.logout()
+    }
   }
 }
 </script>
