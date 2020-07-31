@@ -1,5 +1,10 @@
-var helpers = {
+import store from '../store/index'
+
+const helpers = {
   methods: {
+    loggedIn: function () {
+      return store.state.status.loggedIn
+    },
     elapsed: function (input) {
       var elapsed = input
       if (elapsed === 'HT') {
@@ -22,7 +27,6 @@ var helpers = {
       }
       return elapsed
     },
-
     pending: function (status) {
       return status.toUpperCase() === 'PENDING'
     },
