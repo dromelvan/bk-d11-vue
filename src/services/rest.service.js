@@ -1,5 +1,6 @@
 const endpoints = {
   authenticate: 'authenticate',
+  search: 'search/:search',
 
   seasons: 'seasons',
   seasonIds: 'seasons/ids',

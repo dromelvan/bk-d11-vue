@@ -6,10 +6,7 @@
       </div>
 
       <v-spacer></v-spacer>
-
-      <v-btn icon style="color:white">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      <search-field/>
     </template>
 
     <template v-slot:extension>
@@ -52,6 +49,7 @@ export default {
     }
   },
   components: {
+    SearchField: () => import('@/components/SearchField'),
     LoginDialog: () => import('@/views/authentication/LoginDialog')
   },
   methods: {
