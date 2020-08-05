@@ -10,8 +10,8 @@
           <player-image :version="'tiny'" :id="data.item.id"/>
         </v-list-item-avatar>
         <v-list-item-content>
-          <v-list-item-title v-html="data.item.name"></v-list-item-title>
-          <v-list-item-subtitle v-html="data.item.team"></v-list-item-subtitle>
+          <v-list-item-title class="player-name" v-html="data.item.name"></v-list-item-title>
+          <v-list-item-subtitle class="team-name" v-html="data.item.team"></v-list-item-subtitle>
         </v-list-item-content>
       </template>
     </template>
@@ -86,5 +86,29 @@ export default {
   // Scoping the css for the content dropdown doesn't work.
   .v-autocomplete__content {
     max-height: unset !important;
-  }
+    max-width: 100px !important;
+
+     // TODO: Fix all this color stuff with themes instead.
+    .v-list {
+      background-color: rgba(0, 0, 0, 0.87);
+
+      .v-subheader,
+      .player-name {
+        font-size: 1rem;
+        color: white;
+      }
+
+      .team-name {
+        color: lightgray;
+      }
+
+      .theme--light.v-list-item.v-list-item--highlighted::before {
+        opacity: 0;
+      }
+
+      .v-list-item.v-list-item--highlighted {
+        background-color: $d11-blue-gray;
+      }
+    }
+ }
 </style>
