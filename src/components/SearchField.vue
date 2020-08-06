@@ -66,7 +66,7 @@ export default {
         var count = Math.min(10, searchResult.players.length)
         for (let i = 0; i < count; i++) {
           var player = searchResult.players[i]
-          this.items.push({ name: player.name, id: player.id, team: 'Team Placeholder' })
+          this.items.push({ name: player.name, id: player.id, team: (player.teamId === 1 ? '' : player.teamName) })
         }
 
         if (searchResult.players.length > 10) {
