@@ -6,6 +6,9 @@ Vue.use(Vuex)
 var initialState = {
   status: {
     loggedIn: localStorage.getItem('d11-token') !== null
+  },
+  current: {
+    season: null
   }
 }
 
@@ -19,6 +22,9 @@ export default new Vuex.Store({
     loggedOut (state) {
       localStorage.removeItem('d11-token')
       state.status.loggedIn = false
+    },
+    initialized (state, current) {
+      state.current = current
     }
   },
   actions: {
@@ -27,8 +33,16 @@ export default new Vuex.Store({
     },
     logout ({ commit }) {
       commit('loggedOut')
+    },
+    initialize ({ commit }, current) {
+      commit('initialized', current)
     }
   },
   modules: {
+  },
+  getters: {
+    currentSeason: state => {
+      return state.current.season
+    }
   }
 })

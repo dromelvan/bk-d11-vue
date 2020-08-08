@@ -5,9 +5,11 @@ const endpoints = {
   seasons: 'seasons',
   seasonIds: 'seasons/ids',
   season: 'seasons/:id',
+  currentSeason: 'seasons/current',
 
   premierLeague: 'premier-leagues/:id',
   matchDay: 'match-days/:id',
+  currentMatchDay: 'match-days/current',
   match: 'matches/:id',
   matchEvents: 'matches/:id/events',
 
