@@ -111,4 +111,10 @@ export default {
       }
     }
  }
+
+ // If we want to use a rounded search box
+ // .v-autocomplete__content.v-menu__content {
+ //  transform-origin: center top !important;
+ //  transform: scale(0.85) !important;
+ // }
 </style>
