@@ -14,7 +14,7 @@ export default {
 
 <style lang="scss" scoped>
   .header-context-container {
-    margin-bottom: $d11-background-picture-padding;
+    padding-bottom: 0;
 
     .header-context {
       display: flex;

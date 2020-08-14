@@ -24,6 +24,8 @@
         <v-icon medium>mdi-chevron-right</v-icon>
       </header-context>
 
+      <header-spacer/>
+
       <match-match-result-horizontal :match="match" v-if="smAndUp"/>
 
       <match-match-result-vertical :match="match" v-if="xs"/>
