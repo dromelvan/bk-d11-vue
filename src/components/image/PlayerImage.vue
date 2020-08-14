@@ -1,6 +1,5 @@
 <template>
-  <!-- <img style="vertical-align: middle" :src="`${baseURL}images/${type}/${version}/${id}.${fileType}`"> -->
-  <d11-image class="team-image" :type="'team'" :version="version" :id="id"/>
+  <d11-image class="player-image" :type="'player'" :version="version" :id="id"/>
 </template>
 
 <script>

@@ -12,15 +12,16 @@ import '@/scss/d11.scss'
 Vue.config.productionTip = false
 
 Vue.component('D11Header', () => import('@/components/D11Header'))
-Vue.component('D11Image', () => import('@/components/D11Image'))
-Vue.component('TeamImage', () => import('@/components/TeamImage'))
-Vue.component('D11TeamImage', () => import('@/components/D11TeamImage'))
-Vue.component('PlayerImage', () => import('@/components/PlayerImage'))
+Vue.component('D11Image', () => import('@/components/image/D11Image'))
+Vue.component('TeamImage', () => import('@/components/image/TeamImage'))
+Vue.component('D11TeamImage', () => import('@/components/image/D11TeamImage'))
+Vue.component('PlayerImage', () => import('@/components/image/PlayerImage'))
 
 Vue.component('HeaderSection', () => import('@/components/header/HeaderSection'))
 Vue.component('BackgroundPicture', () => import('@/components/header/BackgroundPicture'))
 Vue.component('HeaderNavigation', () => import('@/components/header/HeaderNavigation'))
 Vue.component('HeaderContext', () => import('@/components/header/HeaderContext'))
+Vue.component('HeaderSpacer', () => import('@/components/header/HeaderSpacer'))
 Vue.component('HeaderContent', () => import('@/components/header/HeaderContent'))
 Vue.component('HeaderContentBackground', () => import('@/components/header/HeaderContentBackground'))
 Vue.component('ContentSection', () => import('@/components/ContentSection'))
