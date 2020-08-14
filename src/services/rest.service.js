@@ -17,6 +17,9 @@ const endpoints = {
   d11MatchDay: 'd11-match-days/:id',
   d11Match: 'd11-matches/:id',
 
+  player: 'players/:id',
+  playerSeasonInfo: 'player-season-infos/:playerId/:seasonId',
+  playerSeasonStat: 'player-season-stats/:playerId/:seasonId',
   playerMatchStatsByMatchId: 'player-match-stats/match/:id',
   playerMatchStatsByD11MatchId: 'player-match-stats/d11-match/:id',
 
