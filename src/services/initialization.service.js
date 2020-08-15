@@ -3,8 +3,10 @@ import CurrentService from './current.service'
 
 const InitializationService = {
   async initialize () {
-    const response = await CurrentService.currentSeason()
-    store.dispatch('initialize', { season: response.data })
+    if (!store.getters.initialized) {
+      const response = await CurrentService.currentSeason()
+      store.dispatch('initialize', { season: response.data })
+    }
   }
 }
 

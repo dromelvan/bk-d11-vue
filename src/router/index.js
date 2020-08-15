@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '../store/index'
 import InitializationService from '../services/initialization.service'
 
 Vue.use(VueRouter)
@@ -16,7 +15,8 @@ const routes = [
   { path: '/d11-leagues/:id', name: 'd11League', component: () => import('@/views/d11_leagues/D11League.vue') },
   { path: '/d11-match-days/:id', name: 'd11MatchDay', component: () => import('@/views/d11_match_days/D11MatchDay.vue') },
   { path: '/d11-match/:id', name: 'd11Match', component: () => import('@/views/d11_matches/D11Match.vue') },
-  { path: '/players/:id/:seasonId', name: 'player', component: () => import('@/views/players/Player.vue') },
+  { path: '/players/:id', name: 'player', component: () => import('@/views/players/Player.vue') },
+  { path: '/players/:id/:seasonId', name: 'playerSeason', component: () => import('@/views/players/Player.vue') },
   { path: '/teams/:id/:seasonId', name: 'team' },
 
   { path: '/about/placeholder', name: 'placeholder' }
@@ -29,10 +29,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (!store.getters.initialized) {
-    InitializationService.initialize()
-  }
-  next()
+  InitializationService.initialize()
+    .then(() => next())
 })
 
 export default router

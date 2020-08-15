@@ -5,6 +5,9 @@ const helpers = {
     loggedIn: function () {
       return store.state.status.loggedIn
     },
+    currentSeason: function () {
+      return store.getters.currentSeason
+    },
     elapsed: function (input) {
       var elapsed = input
       if (elapsed === 'HT') {
