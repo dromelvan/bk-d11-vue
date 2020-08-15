@@ -27,6 +27,7 @@ export default new Vuex.Store({
     initialized (state, current) {
       state.current = current
       state.status.initialized = true
+      console.log('Initialized with current season ' + state.current.season.name)
     }
   },
   actions: {
