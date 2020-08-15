@@ -14,17 +14,12 @@
 </template>
 
 <script>
-import InitializationService from './services/initialization.service'
-
 export default {
   name: 'App',
   components: {
     AppBarSmall: () => import('@/components/AppBarSmall'),
     NavigationDrawer: () => import('@/components/NavigationDrawer'),
     AppBar: () => import('@/components/AppBar')
-  },
-  beforeCreate () {
-    InitializationService.initialize()
   }
 }
 </script>

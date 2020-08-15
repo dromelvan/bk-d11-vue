@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store/index'
+import InitializationService from '../services/initialization.service'
 
 Vue.use(VueRouter)
 
@@ -24,6 +26,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if (!store.getters.initialized) {
+    InitializationService.initialize()
+  }
+  next()
 })
 
 export default router

@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 var initialState = {
   status: {
+    initialized: false,
     loggedIn: localStorage.getItem('d11-token') !== null
   },
   current: {
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     },
     initialized (state, current) {
       state.current = current
+      state.status.initialized = true
     }
   },
   actions: {
@@ -41,6 +43,9 @@ export default new Vuex.Store({
   modules: {
   },
   getters: {
+    initialized: state => {
+      return state.status.initialized
+    },
     currentSeason: state => {
       return state.current.season
     }
