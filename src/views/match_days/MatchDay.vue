@@ -26,6 +26,8 @@
         <v-icon medium>mdi-chevron-right</v-icon>
       </header-context>
 
+      <header-spacer/>
+
       <header-content-background>
         <header-content class="match-day-name">
           <v-btn icon :to="{ name: 'matchDay', params: { id: matchDay.id - 1 }}" class="previous-btn"><v-icon x-large>mdi-chevron-left</v-icon></v-btn>
