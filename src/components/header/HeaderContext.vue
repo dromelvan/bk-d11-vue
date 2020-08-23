@@ -41,10 +41,12 @@ export default {
     }
   }
 
+  /** TODO: Decide if we want this or not
   .v-application-xs {
     .header-context-container {
       margin-bottom: $d11-background-picture-padding / 2;
     }
   }
+  */
 
 </style>

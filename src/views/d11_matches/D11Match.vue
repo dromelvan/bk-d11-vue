@@ -14,6 +14,8 @@
 
       </header-context>
 
+      <header-spacer/>
+
       <d11-match-match-result-horizontal :d11Match="d11Match" v-if="smAndUp"/>
       <d11-match-match-result-vertical :d11Match="d11Match" v-if="xs"/>
 
@@ -34,8 +36,7 @@
           </v-tab>
 
           <v-tab-item v-for="d11TeamId in [ d11Match.homeD11Team.id, d11Match.awayD11Team.id ]" :key="d11TeamId">
-            <player-match-stats-horizontal v-if="smAndUp" :view="'d11Match'" :playerMatchStats="playerMatchStats[d11TeamId]"/>
-            <player-match-stats-vertical v-if="xs" :playerMatchStats="playerMatchStats[d11TeamId]"/>
+            <player-match-stats-by-position v-if="smAndUp" :view="'d11Match'" :playerMatchStats="playerMatchStats[d11TeamId]"/>
           </v-tab-item>
         </v-tabs>
       </v-container>
@@ -56,8 +57,7 @@ export default {
   components: {
     D11MatchMatchResultHorizontal: () => import('@/views/d11_matches/D11MatchMatchResultHorizontal'),
     D11MatchMatchResultVertical: () => import('@/views/d11_matches/D11MatchMatchResultVertical'),
-    PlayerMatchStatsHorizontal: () => import('@/views/player_match_stats/PlayerMatchStatsHorizontal'),
-    PlayerMatchStatsVertical: () => import('@/views/player_match_stats/PlayerMatchStatsVertical')
+    PlayerMatchStatsByPosition: () => import('@/views/player_match_stats/PlayerMatchStatsByPosition')
   },
   mounted () {
     axios

@@ -1,8 +1,6 @@
 <template>
-  <v-container class="list-container">
-    <div class="list-container-header" v-bind:class="{ 'columns': columns }">
-      <slot name="header"></slot>
-    </div>
+  <v-container class="list-container" v-bind:class="{ 'columns': columns }">
+    <slot name="header"></slot>
     <v-divider/>
     <v-list class="list-container-list" flat style="padding-top: 0">
       <slot></slot>
@@ -33,10 +31,6 @@ export default {
       padding-bottom: $d11-spacer;
       line-height: 2.2em;
       font-weight: 600;
-    }
-
-    .list-container-header.columns {
-      padding-bottom: 0;
     }
 
     .list-container-header > * {
@@ -80,6 +74,12 @@ export default {
 
     .v-list-item__content > * {
       line-height: unset;
+    }
+  }
+
+  .list-container.columns {
+    .list-container-header {
+      padding-bottom: 0;
     }
   }
 
